@@ -1,0 +1,110 @@
+footer {
+  height: 100%;
+  background: #000522d0;
+  position: relative;
+}
+
+footer .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+footer .container > div {
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 2.5rem 1.5rem;
+}
+
+footer .container h2 {
+  color: rgb(63, 81, 181);
+}
+
+footer .container p {
+  color: #dde0fd;
+}
+
+footer .about-us a {
+  color: rgb(63, 81, 181);
+  line-height: 1px;
+}
+
+footer .newsletter .form-elements {
+  background: #000522d0;
+  display: inline-block;
+}
+
+footer .newsletter .form-elements input {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #e0c3fc;
+  border-radius: 3px;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  width: 70%;
+  outline: none;
+}
+
+footer .newsletter .form-elements span {
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 0.5rem 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.6rem;
+  cursor: pointer;
+}
+
+footer .instagram div > img {
+  display: inline-block;
+  width: 25%;
+  height: 50%;
+  margin: 0.3rem 0.4rem;
+}
+
+footer .follow div i {
+  color: white;
+  padding: 0 0.4rem;
+}
+
+footer .rights {
+  text-align: center;
+  /* padding: 10px 0; */
+  padding-bottom: 5px;
+}
+
+footer .rights h4 {
+  color: #dde0fd;
+}
+
+footer .rights h4 a {
+  color: rgb(63, 81, 181);
+}
+
+footer .move-up {
+  position: absolute;
+  right: 6%;
+  top: 40%;
+}
+
+footer .move-up span {
+  color: rgb(63, 81, 181);
+}
+
+footer .move-up span:hover {
+  color: #dde0fd;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1130px) {
+  footer .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  footer .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  footer .newsletter .form-elements span {
+    padding-top: 9px;
+    padding-bottom: 8.2px;
+  }
+}

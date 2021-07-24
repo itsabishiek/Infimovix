@@ -1,0 +1,171 @@
+.site-title {
+  background: url("../../assets/wallpaper7.png");
+  background-size: cover;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  animation: hue 10s infinite alternate;
+}
+
+.site-title::after {
+  content: "";
+  width: 100%;
+  height: 95%;
+  background: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: scale(1.15);
+}
+
+@keyframes hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.site-title .site-background {
+  padding-top: 10rem;
+  text-align: center;
+  color: white;
+}
+
+.site-title h1,
+h3 {
+  margin: 0.3rem;
+}
+
+.site-title .btn {
+  margin: 1.8rem;
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 550;
+  cursor: pointer;
+  color: rgb(63, 81, 181);
+}
+
+.site-title .btn:hover {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.viewer_container {
+  margin: 30px;
+  padding: 30px 0px 26px;
+  display: grid;
+  grid-gap: 25px;
+  gap: 25px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.viewer_wrap {
+  padding-top: 56.25%;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  border: 3px solid rgba(249, 249, 249, 0.1);
+}
+
+.viewer_wrap img {
+  inset: 0px;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  position: absolute;
+  transition: opacity 500ms ease-in-out 0s;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.viewer_wrap video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0px;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 500ms ease-in-out 0s;
+}
+
+.viewer_wrap video:hover {
+  opacity: 1;
+}
+
+.viewer_wrap:hover video {
+  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+
+  transform: scale(1.05);
+  border-color: rgba(249, 249, 249, 0.8);
+}
+
+.viewer_wrap:hover video {
+  opacity: 1;
+}
+
+.home_posters {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  margin-left: 30px;
+  padding: 15px;
+  scrollbar-width: none;
+}
+
+.home_posters::-webkit-scrollbar {
+  display: none;
+}
+
+.home_poster {
+  max-height: 250px;
+  object-fit: contain;
+  margin-right: 15px;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  border: 3px solid rgba(249, 249, 249, 0.1);
+}
+
+.home_poster:hover {
+  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+  transform: scale(1.05);
+  border-color: rgb(63, 81, 181);
+}
+
+.home_title {
+  margin-left: 50px;
+  color: rgb(63, 81, 181);
+}
+
+@media (max-width: 768px) {
+  .viewer_container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .home_posters {
+    margin-left: 15px;
+  }
+  .home_title {
+    margin-left: 40px;
+  }
+}

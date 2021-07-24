@@ -1,57 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import "./App.css";
+import SimpleBottomNavigation from "./components/BottomNav";
+import Header from "./components/header/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/home/Home";
+import MovieDetails from "./pages/movieDetails/MovieDetails";
+import Trending from "./pages/trending/Trending";
+import Movies from "./pages/movies/Movies";
+import Series from "./pages/series/Series";
+import Search from "./pages/search/Search";
+import People from "./pages/people/People";
+import { Container } from "@material-ui/core";
+import MediaQuery from "react-responsive";
+import About from "./components/about/About";
+import Contact from "./components/contact/Contact";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <div className="app">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/movie/:id" component={MovieDetails} />
+
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+
+          <Container>
+            <Route path="/trending">
+              <Trending />
+            </Route>
+            <Route path="/movies">
+              <Movies />
+            </Route>
+            <Route path="/series">
+              <Series />
+            </Route>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/people">
+              <People />
+            </Route>
+          </Container>
+        </Switch>
+      </div>
+      <MediaQuery maxWidth={768}>
+        <SimpleBottomNavigation />
+      </MediaQuery>
+    </Router>
   );
 }
 

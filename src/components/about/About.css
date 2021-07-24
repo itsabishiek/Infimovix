@@ -1,0 +1,137 @@
+.about-section {
+  min-height: 95vh;
+}
+
+.about-section .container {
+  max-width: 1140px;
+  margin: auto;
+}
+
+.about-section .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  padding: 0 15px;
+  flex: 0 0 100%;
+  max-width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  color: #dde0fd;
+  text-transform: uppercase;
+}
+
+.section-title h2::before {
+  content: attr(data-heading);
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(63, 81, 181);
+}
+
+.about-section .about-img {
+  flex: 0 0 40%;
+  max-width: 40%;
+  padding: 0 15px;
+}
+
+.about-section .about-img .img-box {
+  padding: 15px;
+  border-radius: 7px;
+}
+
+.about-section .about-img .img-box img {
+  width: 100%;
+  border: 10px solid transparent;
+  border-radius: 7px;
+}
+
+.about-section .about-img .social-links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.about-section .about-img .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 40px;
+  color: #dde0fd;
+  margin: 0 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.about-section .about-img .social-links a::after {
+  border-radius: 50%;
+}
+
+.about-section .about-img .social-links a i {
+  line-height: 40px;
+}
+
+.about-section .about-img .social-links a:hover {
+  color: rgb(63, 81, 181);
+}
+
+.about-section .about-info {
+  flex: 0 0 60%;
+  max-width: 60%;
+  padding: 0 15px;
+}
+
+.about-section .about-info p {
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 15px;
+  color: #dde0fd;
+}
+
+.about-section .about-info span {
+  font-weight: 600;
+  font-size: 18px;
+  color: rgb(63, 81, 181);
+}
+
+.about-section .about-info .btn-1 {
+  margin: 30px 20px 0 0;
+  font-weight: bold;
+  padding: 10px 25px;
+  font-size: 16px;
+  color: rgb(63, 81, 181);
+  background-color: transparent;
+  line-height: 1.5;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: none;
+}
+
+.about-section .about-info .btn-1::after {
+  border-radius: 30px;
+}
+
+@media (max-width: 715px) {
+  .about-section .about-info,
+  .about-section .about-img {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .about-section .about-img {
+    padding-bottom: 40px;
+  }
+  .about-section .about-info .btn-1 {
+    margin-bottom: 80px;
+    margin-top: 20px;
+  }
+}

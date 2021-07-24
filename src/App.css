@@ -1,39 +1,107 @@
-.App {
-  text-align: center;
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul {
+  list-style-type: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+a {
+  text-decoration: none;
 }
 
-.App-header {
+:root {
+  --outer-shadow: 3px 3px 3px rgb(63, 81, 181), -3px -3px 3px #dde0fd;
+  --outer-shadow-0: 0 0 0 rgb(63, 81, 181), 0 0 0 #dde0fd;
+  --inner-shadow: inset 3px 3px 3px rgb(63, 81, 181),
+    inset -3px -3px 3px #dde0fd;
+  --inner-shadow-0: inset 0 0 0 rgb(63, 81, 181), inset 0 0 0 #dde0fd;
+}
+
+.outer-shadow {
+  box-shadow: var(--outer-shadow);
+}
+
+.inner-shadow {
+  box-shadow: var(--inner-shadow);
+}
+
+.hover-in-shadow {
+  position: relative;
+  z-index: 1;
+}
+
+.hover-in-shadow:hover {
+  box-shadow: var(--outer-shadow-0);
+}
+
+.hover-in-shadow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.hover-in-shadow:hover::after {
+  box-shadow: var(--inner-shadow);
+}
+
+.app {
   min-height: 100vh;
+  background-color: #040714;
+  color: white;
+  padding-top: 60px;
+  /* padding-bottom: 60px; */
+}
+
+.pageTitle {
+  text-transform: uppercase;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 2vw;
+  padding: 20px;
+  font-weight: bold;
+  color: rgb(63, 81, 181);
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #fcb045, #fd1d1d, #833ab4);
+  border-radius: 6px;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
+@keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
   }
   50% {
-    transform: translateY(10px);
+    filter: hue-rotate(360deg);
   }
-  100% {
-    transform: translateY(0px);
+}
+
+@media (max-width: 1000px) {
+  .pageTitle {
+    font-size: 6vw;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .app {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-bottom: 60px;
   }
 }

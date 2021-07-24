@@ -1,0 +1,138 @@
+.contact-section {
+  padding: 0 80px;
+  min-height: 100vh;
+}
+
+.contact-section .container {
+  max-width: 1140px;
+  margin: auto;
+}
+
+.contact-section .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contact-section .contact-item {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  padding: 15px;
+  display: flex;
+}
+
+.contact-section .contact-item-inner {
+  padding: 30px 15px;
+  text-align: center;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.contact-section .contact-item-inner i {
+  font-size: 25px;
+  color: rgb(63, 81, 181);
+}
+
+.contact-section .contact-item-inner span {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #dde0fd;
+  margin: 15px 0 10px;
+}
+
+.contact-section .contact-item-inner p {
+  font-size: 16px;
+  color: #dde0fd;
+  line-height: 26px;
+  margin: 0;
+  word-break: break-word;
+}
+
+.contact-section .contact-form {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-top: 50px;
+}
+
+.contact-section .w-50 {
+  padding: 0 15px;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.contact-section .input-group {
+  margin: 0 0 25px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 30px;
+}
+
+.contact-section .input-group::after {
+  border-radius: 30px;
+}
+
+.contact-section .input-group .input-control {
+  height: 45px;
+  display: block;
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  padding: 0 15px;
+  color: #dde0fd;
+  font-weight: 500;
+  outline: none;
+}
+
+.contact-section .input-group .input-control::placeholder {
+  color: #dde0fd;
+}
+
+.contact-section .input-group textarea.input-control {
+  height: 184px;
+  padding-top: 15px;
+  resize: none;
+}
+
+.contact-section .submit-btn {
+  flex: 0 0 100%;
+  max-width: 100%;
+  text-align: center;
+  padding: 0 17px;
+}
+
+.contact-section .submit-btn .btn-1 {
+  font-weight: bold;
+  padding: 10px 25px;
+  font-size: 16px;
+  color: rgb(63, 81, 181);
+  background-color: transparent;
+  line-height: 1.5;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: none;
+}
+
+.contact-section .submit-btn .btn-1::after {
+  border-radius: 30px;
+}
+
+.submit-btn button {
+  font-weight: 600;
+}
+
+@media (max-width: 715px) {
+  .contact-section .contact-item,
+  .contact-section .w-50 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .contact-section {
+    padding: 0 15px;
+  }
+  .contact-section .submit-btn .btn-1 {
+    margin-bottom: 80px;
+  }
+}

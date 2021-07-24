@@ -1,0 +1,42 @@
+.cast_container {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 15px;
+  margin: 15px;
+  scrollbar-width: none;
+}
+
+.cast_container::-webkit-scrollbar {
+  display: none;
+}
+
+.cast_poster {
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  border: 3px solid rgba(249, 249, 249, 0.1);
+  margin: 0 10px;
+}
+
+.cast_poster:hover {
+  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+  transform: translateY(-5px);
+  border-color: rgb(63, 81, 181);
+}
+
+.cast_posters p {
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .cast_container {
+    padding: 0;
+  }
+  .cast_poster {
+    height: 250px;
+  }
+}
