@@ -34,7 +34,8 @@
 
 @media (max-width: 480px) {
   .cast_container {
-    padding: 0;
+    margin: 5px;
+    padding: 10px;
   }
   .cast_poster {
     height: 250px;
