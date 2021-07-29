@@ -19,6 +19,7 @@ import MediaQuery from "react-responsive";
 
 const MovieDetails = ({ match }) => {
   let params = match.params;
+  let genres = [];
   const [detail, setDetail] = useState([]);
   const [video, setVideo] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,8 @@ const MovieDetails = ({ match }) => {
 
     fetchAPI();
   }, [params.id]);
+
+  genres = detail.genres;
 
   const MoviePlayerModal = (props) => {
     const youtubeUrl = "https://www.youtube.com/watch?v=";
@@ -69,6 +72,19 @@ const MovieDetails = ({ match }) => {
       </Modal>
     );
   };
+
+  let genresList;
+  if (genres) {
+    genresList = genres.map((g, i) => {
+      return (
+        <li key={i} className="genre_list">
+          <button type="button" className="genre_btn">
+            {g.name}
+          </button>
+        </li>
+      );
+    });
+  }
 
   const castList = casts.map((cast, index) => {
     return (
@@ -205,6 +221,11 @@ const MovieDetails = ({ match }) => {
           </ContentBar>
         </WrapperBar>
       </MediaQuery>
+
+      <h2 className="home_title">GENRES</h2>
+      <div>
+        <ul className="genres_container">{genresList}</ul>
+      </div>
 
       <h2 className="home_title">CASTS</h2>
       <div className="cast_container">{castList}</div>

@@ -32,6 +32,26 @@
   text-align: center;
 }
 
+.genres_container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px;
+}
+
+.genre_list {
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.genre_btn {
+  border: 2px solid rgb(63, 81, 181);
+  background: transparent;
+  color: #dde0fd;
+  padding: 10px 20px;
+  border-radius: 15px;
+  white-space: nowrap;
+}
+
 @media (max-width: 480px) {
   .cast_container {
     margin: 5px;
