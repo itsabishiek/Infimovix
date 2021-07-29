@@ -13,7 +13,7 @@ import {
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { More } from "@material-ui/icons";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Carousel from "../carousel/Carousel";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,93 +79,89 @@ export default function ContentModal({ children, media_type, id }) {
 
   return (
     <>
-      <div type="button" className="media" onClick={handleOpen}>
-        {children}
-      </div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          {content && (
-            <div className={classes.paper}>
-              <div className="ContentModal">
-                <img
-                  src={
-                    content.poster_path
-                      ? `${img_500}/${content.poster_path}`
-                      : unavailable
-                  }
-                  alt={content.name || content.title}
-                  className="ContentModal__portrait"
-                />
-                <img
-                  src={
-                    content.backdrop_path
-                      ? `${img_500}/${content.backdrop_path}`
-                      : unavailableLandscape
-                  }
-                  alt={content.name || content.title}
-                  className="ContentModal__landscape"
-                />
+      {media_type === "tv" ? (
+        <>
+          <div type="button" className="media" onClick={handleOpen}>
+            {children}
+          </div>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              {content && (
+                <div className={classes.paper}>
+                  <div className="ContentModal">
+                    <img
+                      src={
+                        content.poster_path
+                          ? `${img_500}/${content.poster_path}`
+                          : unavailable
+                      }
+                      alt={content.name || content.title}
+                      className="ContentModal__portrait"
+                    />
+                    <img
+                      src={
+                        content.backdrop_path
+                          ? `${img_500}/${content.backdrop_path}`
+                          : unavailableLandscape
+                      }
+                      alt={content.name || content.title}
+                      className="ContentModal__landscape"
+                    />
 
-                <div className="ContentModal__about">
-                  <span className="ContentModal__title">
-                    {truncate(content.name || content.title, 27)} (
-                    {(
-                      content.first_air_date ||
-                      content.release_date ||
-                      "-----"
-                    ).substring(0, 4)}
-                    )
-                  </span>
-                  {content.tagline && (
-                    <i className="tagline">{content.tagline}</i>
-                  )}
+                    <div className="ContentModal__about">
+                      <span className="ContentModal__title">
+                        {truncate(content.name || content.title, 27)} (
+                        {(
+                          content.first_air_date ||
+                          content.release_date ||
+                          "-----"
+                        ).substring(0, 4)}
+                        )
+                      </span>
+                      {content.tagline && (
+                        <i className="tagline">{content.tagline}</i>
+                      )}
 
-                  <span className="ContentModal__description">
-                    {content.overview}
-                  </span>
+                      <span className="ContentModal__description">
+                        {content.overview}
+                      </span>
 
-                  <div>
-                    <Carousel id={id} media_type={media_type} />
+                      <div>
+                        <Carousel id={id} media_type={media_type} />
+                      </div>
+
+                      <Button
+                        variant="contained"
+                        startIcon={<YouTubeIcon />}
+                        color="primary"
+                        target="__blank"
+                        href={`https://www.youtube.com/watch?v=${video}`}
+                      >
+                        Watch the Trailer
+                      </Button>
+                    </div>
                   </div>
-
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="primary"
-                    target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
-                  >
-                    Watch the Trailer
-                  </Button>
-
-                  {media_type === "tv" ? null : (
-                    <Button
-                      style={{ marginTop: 10 }}
-                      variant="contained"
-                      startIcon={<More />}
-                      color="primary"
-                      onClick={() => history.push(`/movie/${id}`)}
-                    >
-                      See More...
-                    </Button>
-                  )}
                 </div>
-              </div>
-            </div>
-          )}
-        </Fade>
-      </Modal>
+              )}
+            </Fade>
+          </Modal>
+        </>
+      ) : (
+        <Link to={`/movie/${id}`} className="media">
+          {children}
+        </Link>
+      )}
     </>
   );
 }
