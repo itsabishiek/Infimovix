@@ -77,6 +77,10 @@ a {
   border-radius: 6px;
 }
 
+/* ::-webkit-scrollbar-track {
+  background: transparent;
+} */
+
 @keyframes animate {
   0%,
   100% {

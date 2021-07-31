@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "react-alice-carousel/lib/alice-carousel.css";
+import MediaQuery from "react-responsive";
 import { Link, useHistory } from "react-router-dom";
+import Banner from "../../components/banner/Banner";
 import Footer from "../../components/footer/Footer";
 import {
   fetchComedyMovies,
@@ -215,6 +217,10 @@ const Home = () => {
 
         <h3 className="home_title">HORROR MOVIES</h3>
         <div className="home_posters">{movieHorror}</div>
+
+        <MediaQuery minWidth={768}>
+          <Banner />
+        </MediaQuery>
 
         <h3 className="home_title">ROMANCE MOVIES</h3>
         <div className="home_posters">{movieRomance}</div>

@@ -34,6 +34,10 @@ const horrorMovies = `${url}/discover/movie`;
 const romanceMovies = `${url}/discover/movie`;
 const documentaries = `${url}/discover/movie`;
 
+export const requests = {
+  fetchBanner: `${url}/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`,
+};
+
 export const fetchMovies = async () => {
   try {
     const { data } = await axios.get(nowPlayingUrl, {
