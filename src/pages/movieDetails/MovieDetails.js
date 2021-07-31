@@ -118,6 +118,9 @@ const MovieDetails = ({ match }) => {
               }}
               alt={item.title || item.name}
             />
+            <p style={{ color: "rgb(63, 81, 181)", textAlign: "center" }}>
+              {item.title}
+            </p>
           </Link>
         </div>
       </div>
