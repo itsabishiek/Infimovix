@@ -28,25 +28,35 @@ const Banner = () => {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url("https://image.tmdb.org/t/p/original/${banner?.backdrop_path}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${
+          banner.backdrop_path ? banner.backdrop_path : null
+        }")`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner_img">
         <img
-          src={`https://image.tmdb.org/t/p/w500/${banner?.poster_path}`}
-          alt={banner?.title}
+          src={`https://image.tmdb.org/t/p/w500/${
+            banner.poster_path ? banner.poster_path : null
+          }`}
+          alt={banner.title}
         />
       </div>
 
       <div className="banner_contents">
         <div>
           <h1 className="banner_title">
-            {banner?.title || banner?.name || banner?.original_name}
+            {banner.title
+              ? banner.title
+              : null || banner.name
+              ? banner.name
+              : null || banner.original_name
+              ? banner.original_name
+              : null}
           </h1>
 
           <h1 className="banner_description">
-            {truncate(banner?.overview, 250)}
+            {truncate(banner.overview ? banner.overview : null, 250)}
           </h1>
         </div>
       </div>
