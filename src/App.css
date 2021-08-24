@@ -19,6 +19,11 @@ a {
   --inner-shadow-0: inset 0 0 0 rgb(63, 81, 181), inset 0 0 0 #dde0fd;
 }
 
+::selection {
+  background: rgb(63, 81, 181);
+  color: #dde0fd;
+}
+
 .outer-shadow {
   box-shadow: var(--outer-shadow);
 }

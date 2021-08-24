@@ -153,9 +153,22 @@ h3 {
   border-color: rgb(63, 81, 181);
 }
 
+.home_title_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .home_title {
   margin-left: 50px;
   color: rgb(63, 81, 181);
+}
+
+.helper_text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
 }
 
 @media (max-width: 768px) {

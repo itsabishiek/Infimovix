@@ -106,6 +106,7 @@ const Search = () => {
               vote_average={c.vote_average}
             />
           ))}
+
         {searchText === "" &&
           !content &&
           (type ? (
@@ -115,7 +116,13 @@ const Search = () => {
                 src="/assets/images/search.svg"
                 alt=""
               />{" "}
-              <h2 style={{ textAlign: "center", color: "rgb(63, 81, 181)" }}>
+              <h2
+                style={{
+                  textAlign: "center",
+                  color: "rgb(63, 81, 181)",
+                  margin: 0,
+                }}
+              >
                 Search TV Series
               </h2>
             </div>
@@ -126,12 +133,19 @@ const Search = () => {
                 src="/assets/images/search.svg"
                 alt=""
               />
-              <h2 style={{ textAlign: "center", color: "rgb(63, 81, 181)" }}>
+              <h2
+                style={{
+                  textAlign: "center",
+                  color: "rgb(63, 81, 181)",
+                  margin: 0,
+                }}
+              >
                 Search Movies
               </h2>
             </div>
           ))}
       </div>
+
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
       )}

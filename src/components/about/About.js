@@ -40,7 +40,7 @@ const About = () => {
             </div>
           </div>
 
-          <div class="about-info">
+          <div className="about-info">
             <p>
               <span>Hi! My name is Abishiek. Iam a Full Stack Developer.</span>{" "}
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. nemo
@@ -55,10 +55,10 @@ const About = () => {
               perferendis minima beatae debitis, nostrum hic iure ab, modi,
               eveniet porro officiis.
             </p>
-            <a href="#" class="btn-1 outer-shadow hover-in-shadow">
+            <a href="#" className="btn-1 outer-shadow hover-in-shadow">
               Download CV
             </a>
-            <a href="#" class="btn-1 outer-shadow hover-in-shadow">
+            <a href="#" className="btn-1 outer-shadow hover-in-shadow">
               Hire Me
             </a>
           </div>

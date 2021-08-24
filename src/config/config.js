@@ -197,7 +197,23 @@ export const fetchMovieImages = async (id) => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
-    return data;
+
+    return data.backdrops;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchMoviePoster = async (id) => {
+  try {
+    const { data } = await axios.get(`${movieUrl}/${id}/images`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+
+    console.log(data.posters);
+    return data.posters;
   } catch (error) {
     console.log(error);
   }

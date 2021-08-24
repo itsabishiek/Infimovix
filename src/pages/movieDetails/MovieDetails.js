@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   fetchCasts,
   fetchMovieDetail,
+  fetchMovieImages,
+  fetchMoviePoster,
   fetchMovieVideos,
   fetchSimilarMovie,
   img_1280,
   img_500,
+  img_base,
   unavailable,
 } from "../../config/config";
 import styled from "styled-components";
@@ -22,6 +25,8 @@ const MovieDetails = ({ match }) => {
   let genres = [];
   const [detail, setDetail] = useState([]);
   const [video, setVideo] = useState([]);
+  const [images, setImages] = useState([]);
+  const [poster, setPoster] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [casts, setCasts] = useState([]);
   const [similarMovie, setSimilarMovie] = useState([]);
@@ -30,6 +35,8 @@ const MovieDetails = ({ match }) => {
     const fetchAPI = async () => {
       setDetail(await fetchMovieDetail(params.id));
       setVideo(await fetchMovieVideos(params.id));
+      setImages(await fetchMovieImages(params.id));
+      setPoster(await fetchMoviePoster(params.id));
       setCasts(await fetchCasts(params.id));
       setSimilarMovie(await fetchSimilarMovie(params.id));
       window.scroll(0, 0);
@@ -37,6 +44,8 @@ const MovieDetails = ({ match }) => {
 
     fetchAPI();
   }, [params.id]);
+
+  console.log(detail);
 
   genres = detail.genres;
 
@@ -85,6 +94,35 @@ const MovieDetails = ({ match }) => {
       );
     });
   }
+
+  const movieImages = images.map((img, index) => {
+    return (
+      <div key={index} className="img_posters">
+        <img
+          src={img.file_path && `${img_base}${img.file_path}`}
+          alt=""
+          className="img_poster"
+        />
+      </div>
+    );
+  });
+
+  const moviePoster = poster.map((poster, index) => {
+    return (
+      <div key={index}>
+        <img
+          src={poster.file_path && `${img_base}${poster.file_path}`}
+          alt=""
+          style={{
+            height: "260px",
+            objectFit: "contain",
+            marginRight: "15px",
+            borderRadius: "10px",
+          }}
+        />
+      </div>
+    );
+  });
 
   const castList = casts.map((cast, index) => {
     return (
@@ -229,6 +267,26 @@ const MovieDetails = ({ match }) => {
       <div>
         <ul className="genres_container">{genresList}</ul>
       </div>
+
+      {/* <h2 className="home_title">PRODUCTION COMPANIES</h2>
+      <div className="production_companies">
+        {detail.production_companies &&
+          detail.production_companies.map((pc) => <p key={pc.id}>{pc.name}</p>)}
+      </div>
+
+      <h2 className="home_title">PRODUCTION COUNTRIES</h2>
+      <div className="production_countries">
+        {detail.production_countries &&
+          detail.production_countries.map((country) => (
+            <p key={country.iso_3166_1}>{country.name}</p>
+          ))}
+      </div> */}
+
+      <h2 className="home_title">BACKDROPS</h2>
+      <div className="img_container">{movieImages}</div>
+
+      <h2 className="home_title">POSTERS</h2>
+      <div className="img_container">{moviePoster}</div>
 
       <h2 className="home_title">CASTS</h2>
       <div className="cast_container">{castList}</div>
