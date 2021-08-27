@@ -17,6 +17,7 @@ import { PlayCircleFilledRounded } from "@material-ui/icons";
 import { Modal } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
+import MediaQuery from "react-responsive";
 
 const TvSeriesDetails = ({ match }) => {
   let params = match.params;
@@ -216,10 +217,12 @@ const TvSeriesDetails = ({ match }) => {
       <WrapperBar>
         <ContentBar>
           <div className="column">
-            Total Seasons:{" "}
-            {detail.number_of_seasons === 0
-              ? "Unavailable"
-              : detail.number_of_seasons}
+            <p>
+              Total Seasons:{" "}
+              {detail.number_of_seasons === 0
+                ? "Unavailable"
+                : detail.number_of_seasons}
+            </p>
           </div>
           <div className="column">
             <p>
@@ -235,21 +238,23 @@ const TvSeriesDetails = ({ match }) => {
         </ContentBar>
       </WrapperBar>
 
-      <WrapperBar>
-        <ContentBar>
-          <div className="column">
-            <p>Release Date: {detail.first_air_date}</p>
-          </div>
-          <div className="column">
-            <a href={detail.homepage} style={{ color: "#fff" }}>
-              {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
-            </a>
-          </div>
-          <div className="column">
-            <p>Popularity: {detail.popularity}</p>
-          </div>
-        </ContentBar>
-      </WrapperBar>
+      <MediaQuery minWidth={768}>
+        <WrapperBar>
+          <ContentBar>
+            <div className="column">
+              <p>Release Date: {detail.first_air_date}</p>
+            </div>
+            <div className="column">
+              <a href={detail.homepage} style={{ color: "#fff" }}>
+                {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
+              </a>
+            </div>
+            <div className="column">
+              <p>Popularity: {detail.popularity}</p>
+            </div>
+          </ContentBar>
+        </WrapperBar>
+      </MediaQuery>
 
       <h2 className="home_title">GENRES</h2>
       <div>
