@@ -10,8 +10,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import {
+  Code,
   ContactSupport,
-  ExitToApp,
   Home,
   Movie,
   People,
@@ -20,7 +20,6 @@ import {
   Tv,
   Whatshot,
 } from "@material-ui/icons";
-import fire from "../../firebase";
 
 const useStyles = makeStyles({
   list: {
@@ -48,10 +47,6 @@ export default function SideDrawer({ children }) {
   });
 
   const history = useHistory();
-
-  const handleLogout = () => {
-    fire.auth().signOut();
-  };
 
   const itemsList = [
     {
@@ -91,6 +86,11 @@ export default function SideDrawer({ children }) {
       text: "About",
       icon: <Person />,
       onClick: () => history.push("/about"),
+    },
+    {
+      text: "Developer",
+      icon: <Code />,
+      onClick: () => history.push("/developer"),
     },
     {
       text: "Contact",

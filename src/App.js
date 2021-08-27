@@ -16,6 +16,8 @@ import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import TvSeriesDetails from "./pages/tvSeriesDetails/TvSeriesDetails";
+import Developer from "./components/developer/Developer";
 
 function App() {
   return (
@@ -28,8 +30,13 @@ function App() {
           </Route>
           <Route path="/movie/:id" component={MovieDetails} />
 
+          <Route path="/tv/:id" component={TvSeriesDetails} />
+
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/developer">
+            <Developer />
           </Route>
           <Route path="/contact">
             <Contact />

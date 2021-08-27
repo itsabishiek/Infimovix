@@ -2,7 +2,7 @@ import React from "react";
 import "./SingleContent.css";
 import { img_300, unavailable } from "../../config/config";
 import { Badge } from "@material-ui/core";
-import ContentModal from "../contentModal/ContentModal";
+import Linking from "../Linking";
 
 const SingleContent = ({
   id,
@@ -17,7 +17,7 @@ const SingleContent = ({
   }
 
   return (
-    <ContentModal media_type={media_type} id={id}>
+    <Linking id={id} media_type={media_type}>
       <Badge
         className="badge"
         badgeContent={vote_average}
@@ -34,7 +34,7 @@ const SingleContent = ({
         {media_type === "tv" ? "TV Series" : "Movie"}
         <span className="subTitle">{date}</span>
       </span>
-    </ContentModal>
+    </Linking>
   );
 };
 

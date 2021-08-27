@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
 import {
-  fetchCasts,
-  fetchMovieDetail,
-  fetchMovieImages,
-  fetchMoviePoster,
-  fetchMovieVideos,
-  fetchSimilarMovie,
+  fetchSeriesCasts,
+  fetchSeriesDetail,
+  fetchSeriesImages,
+  fetchSeriesPoster,
+  fetchSeriesVideos,
+  fetchSimilarSeries,
   img_1280,
   img_500,
   img_base,
   unavailable,
 } from "../../config/config";
 import styled from "styled-components";
-import "./MovieDetails.css";
-import { calcTime, convertMoney } from "../../helpers/Helpers";
-import { Link } from "react-router-dom";
+import "./TvSeriesDetails.css";
+import { PlayCircleFilledRounded } from "@material-ui/icons";
 import { Modal } from "react-bootstrap";
 import ReactPlayer from "react-player";
-import { PlayCircleFilledRounded } from "@material-ui/icons";
-import MediaQuery from "react-responsive";
+import { Link } from "react-router-dom";
 
-const MovieDetails = ({ match }) => {
+const TvSeriesDetails = ({ match }) => {
   let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
@@ -29,16 +27,16 @@ const MovieDetails = ({ match }) => {
   const [images, setImages] = useState([]);
   const [poster, setPoster] = useState([]);
   const [casts, setCasts] = useState([]);
-  const [similarMovie, setSimilarMovie] = useState([]);
+  const [similarSeries, setSimilarSeries] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setDetail(await fetchMovieDetail(params.id));
-      setVideo(await fetchMovieVideos(params.id));
-      setImages(await fetchMovieImages(params.id));
-      setPoster(await fetchMoviePoster(params.id));
-      setCasts(await fetchCasts(params.id));
-      setSimilarMovie(await fetchSimilarMovie(params.id));
+      setDetail(await fetchSeriesDetail(params.id));
+      setVideo(await fetchSeriesVideos(params.id));
+      setImages(await fetchSeriesImages(params.id));
+      setPoster(await fetchSeriesPoster(params.id));
+      setCasts(await fetchSeriesCasts(params.id));
+      setSimilarSeries(await fetchSimilarSeries(params.id));
       window.scroll(0, 0);
     };
 
@@ -48,6 +46,19 @@ const MovieDetails = ({ match }) => {
   console.log(detail);
 
   genres = detail.genres;
+
+  let genresList;
+  if (genres) {
+    genresList = genres.map((g, i) => {
+      return (
+        <li key={i} className="genre_list">
+          <button type="button" className="genre_btn">
+            {g.name}
+          </button>
+        </li>
+      );
+    });
+  }
 
   const MoviePlayerModal = (props) => {
     const youtubeUrl = "https://www.youtube.com/watch?v=";
@@ -72,20 +83,7 @@ const MovieDetails = ({ match }) => {
     );
   };
 
-  let genresList;
-  if (genres) {
-    genresList = genres.map((g, i) => {
-      return (
-        <li key={i} className="genre_list">
-          <button type="button" className="genre_btn">
-            {g.name}
-          </button>
-        </li>
-      );
-    });
-  }
-
-  const movieImages = images.map((img, index) => {
+  const seriesImages = images.map((img, index) => {
     return (
       <div key={index} className="img_posters">
         <img
@@ -97,7 +95,7 @@ const MovieDetails = ({ match }) => {
     );
   });
 
-  const moviePoster = poster.map((poster, index) => {
+  const seriesPoster = poster.map((poster, index) => {
     return (
       <div key={index}>
         <img
@@ -132,11 +130,11 @@ const MovieDetails = ({ match }) => {
     );
   });
 
-  const similarMovieList = similarMovie.map((item, index) => {
+  const similarSeriesList = similarSeries.map((item, index) => {
     return (
       <div key={index}>
         <div className="cast_posters">
-          <Link to={`/movie/${item.id}`}>
+          <Link to={`/tv/${item.id}`}>
             <img
               className="cast_poster"
               src={item.poster}
@@ -197,7 +195,9 @@ const MovieDetails = ({ match }) => {
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>DIRECTOR(S)</h3>
                 {detail.created_by &&
                   detail.created_by.map((director) => (
-                    <p key={director.credit_id}>{director.name}</p>
+                    <p key={director.credit_id} style={{ fontWeight: "bold" }}>
+                      {director.name}
+                    </p>
                   ))}
               </div>
             </div>
@@ -216,79 +216,62 @@ const MovieDetails = ({ match }) => {
       <WrapperBar>
         <ContentBar>
           <div className="column">
-            <p>Running time: {calcTime(detail.runtime)}</p>
+            Total Seasons:{" "}
+            {detail.number_of_seasons === 0
+              ? "Unavailable"
+              : detail.number_of_seasons}
           </div>
           <div className="column">
             <p>
-              Budget:{" "}
-              {detail.budget === 0
+              Total Episodes:{" "}
+              {detail.number_of_episodes === 0
                 ? "Unavailable"
-                : convertMoney(detail.budget)}
+                : detail.number_of_episodes}
             </p>
           </div>
           <div className="column">
-            <p>
-              Revenue:{" "}
-              {detail.revenue === 0
-                ? "Unavailable"
-                : convertMoney(detail.revenue)}
-            </p>
+            <p>Status: {detail.status}</p>
           </div>
         </ContentBar>
       </WrapperBar>
-      <MediaQuery minWidth={768}>
-        <WrapperBar>
-          <ContentBar>
-            <div className="column">
-              <p>Release Date: {detail.release_date}</p>
-            </div>
-            <div className="column">
-              <a href={detail.homepage} style={{ color: "#fff" }}>
-                {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
-              </a>
-            </div>
-            <div className="column">
-              <p>Popularity: {detail.popularity}</p>
-            </div>
-          </ContentBar>
-        </WrapperBar>
-      </MediaQuery>
+
+      <WrapperBar>
+        <ContentBar>
+          <div className="column">
+            <p>Release Date: {detail.first_air_date}</p>
+          </div>
+          <div className="column">
+            <a href={detail.homepage} style={{ color: "#fff" }}>
+              {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
+            </a>
+          </div>
+          <div className="column">
+            <p>Popularity: {detail.popularity}</p>
+          </div>
+        </ContentBar>
+      </WrapperBar>
 
       <h2 className="home_title">GENRES</h2>
       <div>
         <ul className="genres_container">{genresList}</ul>
       </div>
 
-      {/* <h2 className="home_title">PRODUCTION COMPANIES</h2>
-      <div className="production_companies">
-        {detail.production_companies &&
-          detail.production_companies.map((pc) => <p key={pc.id}>{pc.name}</p>)}
-      </div>
-
-      <h2 className="home_title">PRODUCTION COUNTRIES</h2>
-      <div className="production_countries">
-        {detail.production_countries &&
-          detail.production_countries.map((country) => (
-            <p key={country.iso_3166_1}>{country.name}</p>
-          ))}
-      </div> */}
-
       <h2 className="home_title">BACKDROPS</h2>
-      <div className="img_container">{movieImages}</div>
+      <div className="img_container">{seriesImages}</div>
 
       <h2 className="home_title">POSTERS</h2>
-      <div className="img_container">{moviePoster}</div>
+      <div className="img_container">{seriesPoster}</div>
 
       <h2 className="home_title">CASTS</h2>
       <div className="cast_container">{castList}</div>
 
-      <h2 className="home_title">SIMILAR MOVIES</h2>
-      <div className="cast_container">{similarMovieList}</div>
+      <h2 className="home_title">SIMILAR TV SERIES</h2>
+      <div className="cast_container">{similarSeriesList}</div>
     </>
   );
 };
 
-export default MovieDetails;
+export default TvSeriesDetails;
 
 const Wrapper = styled.div`
   background: ${({ backdrop }) =>

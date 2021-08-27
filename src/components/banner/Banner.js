@@ -34,27 +34,19 @@ const Banner = () => {
     >
       <div className="banner_img">
         <img
-          src={`https://image.tmdb.org/t/p/w500/${
-            banner.poster_path ? banner.poster_path : null
-          }`}
-          alt={banner.title}
+          src={`https://image.tmdb.org/t/p/w500/${banner?.poster_path}`}
+          alt={banner?.title}
         />
       </div>
 
       <div className="banner_contents">
         <div>
           <h1 className="banner_title">
-            {banner.title
-              ? banner.title
-              : null || banner.name
-              ? banner.name
-              : null || banner.original_name
-              ? banner.original_name
-              : null}
+            {banner?.title || banner?.name || banner?.original_name}
           </h1>
 
           <h1 className="banner_description">
-            {truncate(banner.overview ? banner.overview : null, 250)}
+            {truncate(banner?.overview, 250)}
           </h1>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Copyright } from "@material-ui/icons";
 import React from "react";
 import "./Footer.css";

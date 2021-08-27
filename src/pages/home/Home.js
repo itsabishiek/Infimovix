@@ -12,13 +12,14 @@ import {
   fetchNetflixOriginals,
   fetchRomanceMovies,
   fetchTopratedMovie,
+  img_base,
   unavailable,
 } from "../../config/config";
 import "./Home.css";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
-  // const [netOriginals, setNetOriginals] = useState([]);
+  const [netOriginals, setNetOriginals] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [comedyMovies, setComedyMovies] = useState([]);
   const [horrorMovies, setHorrorMovies] = useState([]);
@@ -28,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      // setNetOriginals(await fetchNetflixOriginals());
+      setNetOriginals(await fetchNetflixOriginals());
       setMovieList(await fetchMovieByGenre());
       setTopRated(await fetchTopratedMovie());
       setComedyMovies(await fetchComedyMovies());
@@ -40,19 +41,19 @@ const Home = () => {
     fetchAPI();
   }, []);
 
-  // const netflixOriginals = netOriginals.map((item, index) => {
-  //   return (
-  //     <div key={index}>
-  //       <Link to={`/movie/${item.id}`}>
-  //         <img
-  //           className="home_poster"
-  //           src={item.poster ? item.poster : unavailable}
-  //           alt={item.name}
-  //         />
-  //       </Link>
-  //     </div>
-  //   );
-  // });
+  const netflixOriginals = netOriginals.map((item, index) => {
+    return (
+      <div key={index}>
+        <Link to={`/tv/${item.id}`}>
+          <img
+            className="home_poster"
+            src={item.poster ? `${img_base}${item.poster}` : unavailable}
+            alt={item.name}
+          />
+        </Link>
+      </div>
+    );
+  });
 
   const movies = movieList.map((item, index) => {
     return (
@@ -203,8 +204,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* <h3 className="home_title">NETFLIX ORIGINALS</h3>
-        <div className="home_posters">{netflixOriginals}</div> */}
+        <h3 className="home_title">NETFLIX ORIGINALS</h3>
+        <div className="home_posters">{netflixOriginals}</div>
 
         <h3 className="home_title">NOW STREAMING</h3>
         <div className="home_posters">{movies}</div>

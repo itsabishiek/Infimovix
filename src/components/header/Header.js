@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Menu, Movie, People, Search, Tv, Whatshot } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";

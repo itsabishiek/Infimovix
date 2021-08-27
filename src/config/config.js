@@ -163,20 +163,6 @@ export const fetchMovieDetail = async (id) => {
   }
 };
 
-export const fetchSeriesDetail = async (id) => {
-  try {
-    const { data } = await axios.get(`${seriesUrl}/${id}`, {
-      params: {
-        api_key: process.env.REACT_APP_API_KEY,
-        language: "en_US",
-      },
-    });
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const fetchMovieVideos = async (id) => {
   try {
     const { data } = await axios.get(`${movieUrl}/${id}/videos`, {
@@ -388,4 +374,102 @@ export const fetchDocumentaries = async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// ----------------- TV Series ----------------- //
+
+export const fetchSeriesDetail = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+        language: "en_US",
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchSeriesVideos = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}/videos`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+    return data["results"][0];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchSeriesImages = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}/images`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+    return data.backdrops;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchSeriesPoster = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}/images`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+
+    console.log(data.posters);
+    return data.posters;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchSeriesCasts = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}/credits`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+    const modifiedData = data["cast"].map((c) => ({
+      id: c["cast_id"],
+      character: c["character"],
+      name: c["name"],
+      img: "https://image.tmdb.org/t/p/w200" + c["profile_path"],
+    }));
+
+    return modifiedData;
+  } catch (error) {}
+};
+
+export const fetchSimilarSeries = async (id) => {
+  try {
+    const { data } = await axios.get(`${seriesUrl}/${id}/similar`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+        language: "en_US",
+      },
+    });
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((m) => ({
+      id: m["id"],
+      backPoster: posterUrl + m["backdrop_path"],
+      popularity: m["popularith"],
+      title: m["original_name"],
+      poster: posterUrl + m["poster_path"],
+      overview: m["overview"],
+      rating: m["vote_average"],
+    }));
+
+    return modifiedData;
+  } catch (error) {}
 };

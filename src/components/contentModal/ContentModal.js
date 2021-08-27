@@ -12,8 +12,7 @@ import {
 } from "../../config/config";
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import { More } from "@material-ui/icons";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Carousel from "../carousel/Carousel";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,8 +38,6 @@ export default function ContentModal({ children, media_type, id }) {
   const [open, setOpen] = React.useState(false);
   const [content, setContent] = useState();
   const [video, setVideo] = useState();
-
-  const history = useHistory();
 
   const handleOpen = () => {
     setOpen(true);
