@@ -4,9 +4,15 @@ import "./About.css";
 
 const About = () => {
   return (
-    <div>
-      <h1>ABOUT THE WEBSITE!</h1>
-    </div>
+    <section className="about-section section">
+      <div className="container">
+        <div className="row">
+          <div className="section-title">
+            <h2 data-heading="main-info">About this Website</h2>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

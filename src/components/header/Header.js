@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Menu, Movie, People, Search, Tv, Whatshot } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SideDrawer from "../drawer/Drawer";
 import "./Header.css";
 
@@ -39,7 +39,11 @@ const Header = () => {
         <div className="nav_items">
           <ul>
             <li>
-              <Link to="/trending" style={{ display: "flex" }}>
+              <NavLink
+                to="/trending"
+                activeClassName="navbar__link--active"
+                style={{ display: "flex" }}
+              >
                 <a href="#" style={{ display: "flex" }}>
                   <Whatshot
                     style={{
@@ -51,11 +55,15 @@ const Header = () => {
                   />
                   Trending
                 </a>
-              </Link>
+              </NavLink>
             </li>
 
             <li>
-              <Link to="/movies" style={{ display: "flex" }}>
+              <NavLink
+                to="/movies"
+                activeClassName="navbar__link--active"
+                style={{ display: "flex" }}
+              >
                 <a href="#" style={{ display: "flex" }}>
                   <Movie
                     style={{
@@ -67,11 +75,15 @@ const Header = () => {
                   />
                   Movies
                 </a>
-              </Link>
+              </NavLink>
             </li>
 
             <li>
-              <Link to="/series" style={{ display: "flex" }}>
+              <NavLink
+                to="/series"
+                activeClassName="navbar__link--active"
+                style={{ display: "flex" }}
+              >
                 <a href="#" style={{ display: "flex" }}>
                   <Tv
                     style={{
@@ -83,11 +95,15 @@ const Header = () => {
                   />
                   TV Shows
                 </a>
-              </Link>
+              </NavLink>
             </li>
 
             <li>
-              <Link to="/people" style={{ display: "flex" }}>
+              <NavLink
+                to="/people"
+                activeClassName="navbar__link--active"
+                style={{ display: "flex" }}
+              >
                 <a href="#" style={{ display: "flex" }}>
                   <People
                     style={{
@@ -99,7 +115,7 @@ const Header = () => {
                   />
                   People
                 </a>
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

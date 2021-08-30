@@ -28,6 +28,8 @@ const Login = () => {
           case "auth/wrong-password":
             setPasswordError(err.message);
             break;
+          default:
+          // do nothing
         }
       });
   };

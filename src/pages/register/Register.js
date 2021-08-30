@@ -27,6 +27,8 @@ const Register = () => {
           case "auth/weak-password":
             setPasswordError(err.message);
             break;
+          default:
+          // do nothing
         }
       });
   };

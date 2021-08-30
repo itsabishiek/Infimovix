@@ -63,10 +63,13 @@
 }
 
 .nav_items a {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-weight: 550;
   color: #dde0fd;
   outline: none;
+  height: 10vh;
   transition: all 0.2s ease;
 }
 
@@ -105,6 +108,12 @@
 
 .join_container a:hover {
   color: rgb(63, 81, 181);
+}
+
+.navbar__link--active {
+  border-bottom: 3px solid var(--primary);
+  padding-top: 2px;
+  transition: border-bottom 0.5s ease-in-out;
 }
 
 @media (max-width: 768px) {
