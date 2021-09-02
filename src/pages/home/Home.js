@@ -41,7 +41,7 @@ const Home = () => {
     fetchAPI();
   }, []);
 
-  const netflixOriginals = netOriginals.map((item, index) => {
+  const netflixOriginals = netOriginals?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/tv/${item.id}`}>

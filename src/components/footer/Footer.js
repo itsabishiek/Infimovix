@@ -66,8 +66,9 @@ const Footer = () => {
 
       <div className="rights flex-row">
         <h4 className="text-grey">
-          Copyright <Copyright style={{ fontSize: 15 }} /> 2021 | All rights
-          reserved | Made by Infinity <a href="">Founder - Abishiek</a>
+          Copyright <Copyright style={{ fontSize: 15 }} />{" "}
+          {new Date().getFullYear()} | All rights reserved | Made by Infinity{" "}
+          <a href="">Founder - Abishiek</a>
         </h4>
       </div>
       <div onClick={() => window.scroll(0, 0)} className="move-up">

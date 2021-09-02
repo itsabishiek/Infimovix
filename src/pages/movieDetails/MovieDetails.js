@@ -47,7 +47,7 @@ const MovieDetails = ({ match }) => {
 
   console.log(detail);
 
-  genres = detail.genres;
+  genres = detail?.genres;
 
   const MoviePlayerModal = (props) => {
     const youtubeUrl = "https://www.youtube.com/watch?v=";
@@ -63,7 +63,7 @@ const MovieDetails = ({ match }) => {
         <Modal.Body style={{ backgroundColor: "#000000" }}>
           <ReactPlayer
             className="container-fluid"
-            url={youtubeUrl + video.key}
+            url={youtubeUrl + video?.key}
             playing
             width="100%"
           ></ReactPlayer>
@@ -244,7 +244,9 @@ const MovieDetails = ({ match }) => {
             </div>
             <div className="column">
               <a href={detail.homepage} style={{ color: "#fff" }}>
-                {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
+                {detail.homepage === ""
+                  ? "Unavailable"
+                  : truncate(detail.homepage, 40)}
               </a>
             </div>
             <div className="column">

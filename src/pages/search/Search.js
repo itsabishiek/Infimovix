@@ -112,7 +112,7 @@ const Search = () => {
           (type ? (
             <div>
               <img
-                style={{ marginTop: 35, width: "350px", height: "350px" }}
+                style={{ marginTop: 35, width: "300px", height: "300px" }}
                 src="/assets/images/search.svg"
                 alt=""
               />{" "}
@@ -129,7 +129,7 @@ const Search = () => {
           ) : (
             <div>
               <img
-                style={{ marginTop: 35, width: "350px", height: "350px" }}
+                style={{ marginTop: 35, width: "300px", height: "300px" }}
                 src="/assets/images/search.svg"
                 alt=""
               />

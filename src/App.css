@@ -17,6 +17,7 @@ a {
   --inner-shadow: inset 3px 3px 3px rgb(63, 81, 181),
     inset -3px -3px 3px #dde0fd;
   --inner-shadow-0: inset 0 0 0 rgb(63, 81, 181), inset 0 0 0 #dde0fd;
+
   --primary: rgb(63, 81, 181);
   --text-color: #dde0fd;
 }
