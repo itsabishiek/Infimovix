@@ -1,0 +1,61 @@
+.watchlist_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  margin-top: 20px;
+}
+
+.watchlist_container {
+  margin: 5px 10px;
+  position: relative;
+}
+
+.watchlist_img {
+  height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  border: 3px solid rgba(249, 249, 249, 0.1);
+}
+
+.watchlist_img:hover {
+  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+  transform: translateY(-5px);
+  border-color: rgb(63, 81, 181);
+}
+
+.ctrl-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  color: #dde0fd;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  padding: 5px;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.ctrl-btn:hover {
+  color: rgb(63, 81, 181);
+}
+
+.watchlist_container:hover .ctrl-btn {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .watchlist_img {
+    height: 250px;
+  }
+}

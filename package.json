@@ -13,7 +13,6 @@
     "axios": "^0.21.1",
     "emailjs-com": "^3.2.0",
     "firebase": "^8.7.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
     "react-bootstrap": "^1.6.1",
@@ -47,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-devtools": "^4.18.0"
   }
 }

@@ -59,6 +59,24 @@ a {
   box-shadow: var(--inner-shadow);
 }
 
+.btn {
+  margin: 1.8rem;
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 550;
+  cursor: pointer;
+  color: rgb(63, 81, 181);
+}
+
+.btn:hover {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
 .app {
   min-height: 100vh;
   background-color: #040714;

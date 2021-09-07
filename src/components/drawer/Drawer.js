@@ -10,8 +10,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import {
+  AddToQueue,
   Code,
   ContactSupport,
+  FavoriteOutlined,
   Home,
   Movie,
   People,
@@ -78,6 +80,16 @@ export default function SideDrawer({ children }) {
       text: "People",
       icon: <People />,
       onClick: () => history.push("/people"),
+    },
+    {
+      text: "My Watchlist",
+      icon: <AddToQueue />,
+      onClick: () => history.push("/watchlist"),
+    },
+    {
+      text: "My Favourites",
+      icon: <FavoriteOutlined />,
+      onClick: () => history.push("/liked"),
     },
   ];
 

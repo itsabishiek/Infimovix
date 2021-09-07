@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   fetchSeriesCasts,
   fetchSeriesDetail,
@@ -13,13 +13,22 @@ import {
 } from "../../config/config";
 import styled from "styled-components";
 import "./TvSeriesDetails.css";
-import { PlayCircleFilledRounded } from "@material-ui/icons";
+import {
+  AddToQueue,
+  FavoriteBorderOutlined,
+  PlayCircleFilledRounded,
+} from "@material-ui/icons";
 import { Modal } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
+import { GlobalContext } from "../../context/GlobalState";
+import { toast } from "react-toastify";
 
 const TvSeriesDetails = ({ match }) => {
+  const { addMovieToWatchlist, addMovieToFavourite } =
+    useContext(GlobalContext);
+
   let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
@@ -29,6 +38,18 @@ const TvSeriesDetails = ({ match }) => {
   const [poster, setPoster] = useState([]);
   const [casts, setCasts] = useState([]);
   const [similarSeries, setSimilarSeries] = useState([]);
+
+  const notifyWatchlist = () => {
+    toast.dark("TV show added to your watchlist.", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+  };
+
+  const notifyFavourite = () => {
+    toast.dark("TV show added to your favourites.", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+  };
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -46,7 +67,7 @@ const TvSeriesDetails = ({ match }) => {
 
   console.log(detail);
 
-  genres = detail.genres;
+  genres = detail?.genres;
 
   let genresList;
   if (genres) {
@@ -200,6 +221,30 @@ const TvSeriesDetails = ({ match }) => {
                       {director.name}
                     </p>
                   ))}
+              </div>
+            </div>
+
+            <div className="list-container">
+              <div className="watchlist">
+                <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
+                <AddToQueue
+                  className="watchlist-btn"
+                  onClick={() => {
+                    addMovieToWatchlist(detail);
+                    notifyWatchlist();
+                  }}
+                />
+              </div>
+
+              <div className="like">
+                <h3 style={{ color: "rgb(63, 81, 181)" }}>FAVOURITE</h3>
+                <FavoriteBorderOutlined
+                  className="like-btn"
+                  onClick={() => {
+                    addMovieToFavourite(detail);
+                    notifyFavourite();
+                  }}
+                />
               </div>
             </div>
 
@@ -358,13 +403,16 @@ const Text = styled.div`
     font-weight: 600;
     border-radius: 50%;
     margin: 0;
+    margin-left: 10px;
+    margin-top: 10px;
   }
 
   .director {
     margin: 0 0 0 40px;
 
     p {
-      margin: 0;
+      margin-left: 10px;
+      margin-top: 10px;
     }
   }
 
@@ -379,8 +427,46 @@ const Text = styled.div`
 
     .play-btn {
       margin-top: 10px;
+      margin-left: 10px;
       font-size: 40px;
       cursor: pointer;
+      color: #dde0fd;
+    }
+  }
+
+  .list-container {
+    display: flex;
+    justify-content: flex-start;
+
+    .watchlist {
+      margin-top: 20px;
+
+      .watchlist-btn {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 38px;
+        height: 38px;
+        padding: 8px;
+        border-radius: 50%;
+        background-color: rgb(63, 81, 181);
+        cursor: pointer;
+      }
+    }
+
+    .like {
+      margin-top: 20px;
+      margin-left: 30px;
+
+      .like-btn {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 35px;
+        height: 35px;
+        padding: 8px;
+        border-radius: 50%;
+        background-color: rgb(63, 81, 181);
+        cursor: pointer;
+      }
     }
   }
 `;
