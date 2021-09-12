@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   fetchCasts,
+  fetchCrew,
   fetchMovieDetail,
   fetchMovieImages,
   fetchMoviePoster,
@@ -33,6 +34,7 @@ const MovieDetails = ({ match }) => {
   let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
+  const [crew, setCrew] = useState([]);
   const [video, setVideo] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [images, setImages] = useState([]);
@@ -59,6 +61,7 @@ const MovieDetails = ({ match }) => {
   useEffect(() => {
     const fetchAPI = async () => {
       setDetail(await fetchMovieDetail(params.id));
+      setCrew(await fetchCrew(params.id));
       setVideo(await fetchMovieVideos(params.id));
       setImages(await fetchMovieImages(params.id));
       setPoster(await fetchMoviePoster(params.id));
@@ -224,6 +227,14 @@ const MovieDetails = ({ match }) => {
                   detail.created_by.map((director) => (
                     <p key={director.credit_id}>{director.name}</p>
                   ))}
+
+                {crew.map((director) => (
+                  <div key={director.credit_id}>
+                    {director.job === "Director" && (
+                      <p style={{ fontWeight: "bold" }}>{director.name}</p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -232,7 +243,7 @@ const MovieDetails = ({ match }) => {
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
                 <AddToQueue
                   className="watchlist-btn"
-                  disabled={watchlistDisabled}
+                  disabled={() => watchlistDisabled()}
                   onClick={() => {
                     addMovieToWatchlist(detail);
                     notifyWatchlist();
@@ -430,7 +441,9 @@ const Text = styled.div`
     margin: 0 0 0 40px;
 
     p {
-      margin: 0;
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 0;
     }
   }
 

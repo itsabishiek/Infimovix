@@ -223,6 +223,20 @@ export const fetchCasts = async (id) => {
   } catch (error) {}
 };
 
+export const fetchCrew = async (id) => {
+  try {
+    const { data } = await axios.get(`${movieUrl}/${id}/credits`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+    console.log(data.crew);
+    return data.crew;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const fetchSimilarMovie = async (id) => {
   try {
     const { data } = await axios.get(`${movieUrl}/${id}/similar`, {

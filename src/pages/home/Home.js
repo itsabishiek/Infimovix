@@ -47,7 +47,7 @@ const Home = () => {
         <Link to={`/tv/${item.id}`}>
           <img
             className="home_poster"
-            src={item.poster ? `${img_base}${item.poster}` : unavailable}
+            src={`${img_base}${item.poster}`}
             alt={item.name}
           />
         </Link>

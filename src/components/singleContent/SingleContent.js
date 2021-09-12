@@ -2,7 +2,7 @@ import React from "react";
 import "./SingleContent.css";
 import { img_300, unavailable } from "../../config/config";
 import { Badge } from "@material-ui/core";
-import Linking from "../Linking";
+import Linking from "../../helpers/Linking";
 
 const SingleContent = ({
   id,

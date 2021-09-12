@@ -413,6 +413,7 @@ const Text = styled.div`
     p {
       margin-left: 10px;
       margin-top: 10px;
+      margin-bottom: 0;
     }
   }
 
