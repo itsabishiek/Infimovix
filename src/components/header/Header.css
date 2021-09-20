@@ -21,6 +21,10 @@
   justify-content: center;
 }
 
+/* .brand_container {
+  animation: hue 10s infinite alternate;
+} */
+
 .header_items span {
   display: flex;
   align-items: center;

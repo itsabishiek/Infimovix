@@ -93,12 +93,13 @@ const TvSeriesDetails = ({ match }) => {
         style={{ outline: "none" }}
       >
         <Modal.Header closeButton></Modal.Header>
-        <Modal.Body style={{ backgroundColor: "#000000" }}>
+        <Modal.Body style={{ backgroundColor: "#000000", marginBottom: 10 }}>
           <ReactPlayer
             className="container-fluid"
             url={youtubeUrl + video.key}
             playing
             width="100%"
+            controls
           ></ReactPlayer>
         </Modal.Body>
       </Modal>

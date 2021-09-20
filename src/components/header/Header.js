@@ -27,6 +27,7 @@ const Header = () => {
       <div className="header_items">
         <Link
           to="/"
+          className="brand_container"
           style={{
             display: "flex",
             alignItems: "center",
