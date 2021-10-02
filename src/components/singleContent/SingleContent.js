@@ -1,8 +1,9 @@
 import React from "react";
 import "./SingleContent.css";
 import { img_300, unavailable } from "../../config/config";
-import { Badge } from "@material-ui/core";
 import Linking from "../../helpers/Linking";
+import Badge from "@mui/material/Badge";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const SingleContent = ({
   id,
@@ -16,14 +17,29 @@ const SingleContent = ({
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "rgb(63, 81, 181)",
+      },
+      secondary: {
+        main: "rgb(206, 41, 41)",
+      },
+    },
+  });
+
   return (
     <Linking id={id} media_type={media_type}>
-      <Badge
-        className="badge"
-        badgeContent={vote_average}
-        color={vote_average > 6 ? "primary" : "secondary"}
-        style={{ position: "absolute" }}
-      />
+      <ThemeProvider theme={darkTheme}>
+        <Badge
+          className="badge"
+          badgeContent={vote_average}
+          color={vote_average > 6 ? "primary" : "secondary"}
+          style={{ position: "absolute" }}
+        />
+      </ThemeProvider>
+
       <img
         className="poster"
         src={poster ? `${img_300}${poster}` : unavailable}

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Menu, Movie, People, Search, Tv, Whatshot } from "@material-ui/icons";
+import { Menu, Movie, People, Search, Tv, Whatshot } from "@mui/icons-material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import SideDrawer from "../drawer/Drawer";
@@ -7,6 +8,15 @@ import "./Header.css";
 
 const Header = () => {
   const [show, handleShow] = useState(false);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "rgb(63, 81, 181)",
+      },
+    },
+  });
 
   const transitionNavBar = () => {
     if (window.scrollY > 100) {
@@ -45,17 +55,15 @@ const Header = () => {
                 activeClassName="navbar__link--active"
                 style={{ display: "flex" }}
               >
-                <a href="#" style={{ display: "flex" }}>
-                  <Whatshot
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "7px",
-                    }}
-                  />
-                  Trending
-                </a>
+                <Whatshot
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "7px",
+                  }}
+                />
+                Trending
               </NavLink>
             </li>
 
@@ -65,17 +73,15 @@ const Header = () => {
                 activeClassName="navbar__link--active"
                 style={{ display: "flex" }}
               >
-                <a href="#" style={{ display: "flex" }}>
-                  <Movie
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "7px",
-                    }}
-                  />
-                  Movies
-                </a>
+                <Movie
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "7px",
+                  }}
+                />
+                Movies
               </NavLink>
             </li>
 
@@ -85,17 +91,15 @@ const Header = () => {
                 activeClassName="navbar__link--active"
                 style={{ display: "flex" }}
               >
-                <a href="#" style={{ display: "flex" }}>
-                  <Tv
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "7px",
-                    }}
-                  />
-                  TV Shows
-                </a>
+                <Tv
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "7px",
+                  }}
+                />
+                TV Shows
               </NavLink>
             </li>
 
@@ -105,17 +109,15 @@ const Header = () => {
                 activeClassName="navbar__link--active"
                 style={{ display: "flex" }}
               >
-                <a href="#" style={{ display: "flex" }}>
-                  <People
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "7px",
-                    }}
-                  />
-                  People
-                </a>
+                <People
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: "7px",
+                  }}
+                />
+                People
               </NavLink>
             </li>
           </ul>
@@ -132,17 +134,19 @@ const Header = () => {
             </li> */}
             <li>
               <Link to="/search">
-                <Search
-                  color="primary"
-                  fontSize="medium"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                  }}
-                />
+                <ThemeProvider theme={darkTheme}>
+                  <Search
+                    color="primary"
+                    fontSize="medium"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  />
+                </ThemeProvider>
               </Link>
             </li>
             <SideDrawer
@@ -153,17 +157,19 @@ const Header = () => {
               }}
             >
               <li>
-                <Menu
-                  fontSize="medium"
-                  color="primary"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                  }}
-                />
+                <ThemeProvider theme={darkTheme}>
+                  <Menu
+                    fontSize="medium"
+                    color="primary"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  />
+                </ThemeProvider>
               </li>
             </SideDrawer>
           </ul>

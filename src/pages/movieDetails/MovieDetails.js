@@ -18,14 +18,14 @@ import { calcTime, convertMoney } from "../../helpers/Helpers";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import ReactPlayer from "react-player";
+import MediaQuery from "react-responsive";
+import { GlobalContext } from "../../context/GlobalState";
+import { toast } from "react-toastify";
 import {
   AddToQueue,
   FavoriteBorderOutlined,
   PlayCircleFilledRounded,
-} from "@material-ui/icons";
-import MediaQuery from "react-responsive";
-import { GlobalContext } from "../../context/GlobalState";
-import { toast } from "react-toastify";
+} from "@mui/icons-material";
 
 const MovieDetails = ({ match }) => {
   const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
@@ -305,7 +305,12 @@ const MovieDetails = ({ match }) => {
               <p>Release Date: {detail.release_date}</p>
             </div>
             <div className="column">
-              <a href={detail.homepage} style={{ color: "#fff" }}>
+              <a
+                href={detail.homepage}
+                target="_blank"
+                rel="noreferrer noopener"
+                style={{ color: "#fff" }}
+              >
                 {detail.homepage === ""
                   ? "Unavailable"
                   : truncate(detail.homepage, 40)}

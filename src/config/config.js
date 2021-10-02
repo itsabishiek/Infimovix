@@ -198,7 +198,6 @@ export const fetchMoviePoster = async (id) => {
       },
     });
 
-    console.log(data.posters);
     return data.posters;
   } catch (error) {
     console.log(error);
@@ -230,7 +229,7 @@ export const fetchCrew = async (id) => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
-    console.log(data.crew);
+
     return data.crew;
   } catch (error) {
     console.log(error);
@@ -440,7 +439,6 @@ export const fetchSeriesPoster = async (id) => {
       },
     });
 
-    console.log(data.posters);
     return data.posters;
   } catch (error) {
     console.log(error);

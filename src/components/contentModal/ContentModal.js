@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./ContentModal.css";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import {
   img_500,
   unavailable,
   unavailableLandscape,
 } from "../../config/config";
-import { Button } from "@material-ui/core";
-import YouTubeIcon from "@material-ui/icons/YouTube";
 import { Link } from "react-router-dom";
 import Carousel from "../carousel/Carousel";
+import { Backdrop, Fade, Modal, Button } from "@mui/material";
+import { YouTube } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -140,7 +137,7 @@ export default function ContentModal({ children, media_type, id }) {
 
                       <Button
                         variant="contained"
-                        startIcon={<YouTubeIcon />}
+                        startIcon={<YouTube />}
                         color="primary"
                         target="__blank"
                         href={`https://www.youtube.com/watch?v=${video}`}

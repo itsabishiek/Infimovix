@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import { img_300 } from "../../config/config";
 
-const WatchlistCard = ({ id, poster, media_type, title }) => {
+const WatchlistCard = ({ id, poster, title }) => {
   const { removeMovieFromFavourite } = useContext(GlobalContext);
 
   return (

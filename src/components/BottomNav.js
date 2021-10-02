@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import { Home, Movie, Search, Tv, Whatshot } from "@material-ui/icons";
+import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Home, Movie, Search, Tv, Whatshot } from "@mui/icons-material";
 
 const useStyles = makeStyles({
   root: {

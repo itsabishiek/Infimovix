@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Copyright } from "@material-ui/icons";
 import React from "react";
 import "./Footer.css";
 
@@ -48,16 +47,16 @@ const Footer = () => {
           <h2>Follow Me</h2>
           <p>Let us be Social</p>
           <div>
-            <a href="">
+            <a href="#">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="">
+            <a href="#">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="">
+            <a href="#">
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="">
+            <a href="#">
               <i className="fab fa-youtube"></i>
             </a>
           </div>
@@ -66,7 +65,7 @@ const Footer = () => {
 
       <div className="rights flex-row">
         <h4 className="text-grey">
-          Copyright <Copyright style={{ fontSize: 15 }} />{" "}
+          Copyright &copy;
           {new Date().getFullYear()} | All rights reserved | Made by Infinity{" "}
           <a href="">Founder - Abishiek</a>
         </h4>

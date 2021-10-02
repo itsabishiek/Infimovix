@@ -55,7 +55,7 @@ const Home = () => {
     );
   });
 
-  const movies = movieList.map((item, index) => {
+  const movies = movieList?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -69,7 +69,7 @@ const Home = () => {
     );
   });
 
-  const topMovies = topRated.map((item, index) => {
+  const topMovies = topRated?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -83,7 +83,7 @@ const Home = () => {
     );
   });
 
-  const movieComedy = comedyMovies.map((item, index) => {
+  const movieComedy = comedyMovies?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -97,7 +97,7 @@ const Home = () => {
     );
   });
 
-  const movieHorror = horrorMovies.map((item, index) => {
+  const movieHorror = horrorMovies?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -111,7 +111,7 @@ const Home = () => {
     );
   });
 
-  const movieRomance = romanceMovies.map((item, index) => {
+  const movieRomance = romanceMovies?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -125,7 +125,7 @@ const Home = () => {
     );
   });
 
-  const movieDocumentaries = documentaries.map((item, index) => {
+  const movieDocumentaries = documentaries?.map((item, index) => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
@@ -146,7 +146,7 @@ const Home = () => {
           <div className="site-background">
             <h3>Movies & TV Shows</h3>
             <h1>InfiMovix - The Entertainment Hub</h1>
-            <button onClick={() => history.push("/trending")} class="btn">
+            <button onClick={() => history.push("/trending")} className="btn">
               Explore
             </button>
           </div>

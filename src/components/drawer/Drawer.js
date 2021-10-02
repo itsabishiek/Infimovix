@@ -1,13 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import {
   AddToQueue,
@@ -21,7 +15,15 @@ import {
   Search,
   Tv,
   Whatshot,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 
 const useStyles = makeStyles({
   list: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles({
 
 const darkTheme = createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
   },
 });
 

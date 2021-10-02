@@ -10,7 +10,7 @@ import Movies from "./pages/movies/Movies";
 import Series from "./pages/series/Series";
 import Search from "./pages/search/Search";
 import People from "./pages/people/People";
-import { Container } from "@material-ui/core";
+import Container from "@mui/material/Container";
 import MediaQuery from "react-responsive";
 import About from "./components/about/About";
 import Contact from "./components/contact/Contact";

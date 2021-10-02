@@ -22,7 +22,7 @@ const ErrorFallback = () => {
       </p>
 
       <Link to="/">
-        <button class="fallback-btn" onClick={refreshPage}>
+        <button className="fallback-btn" onClick={refreshPage}>
           Back to home
         </button>
       </Link>

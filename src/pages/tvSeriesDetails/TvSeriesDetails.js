@@ -13,17 +13,17 @@ import {
 } from "../../config/config";
 import styled from "styled-components";
 import "./TvSeriesDetails.css";
-import {
-  AddToQueue,
-  FavoriteBorderOutlined,
-  PlayCircleFilledRounded,
-} from "@material-ui/icons";
 import { Modal } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import { GlobalContext } from "../../context/GlobalState";
 import { toast } from "react-toastify";
+import {
+  AddToQueue,
+  FavoriteBorderOutlined,
+  PlayCircleFilledRounded,
+} from "@mui/icons-material";
 
 const TvSeriesDetails = ({ match }) => {
   const { addMovieToWatchlist, addMovieToFavourite } =
@@ -64,8 +64,6 @@ const TvSeriesDetails = ({ match }) => {
 
     fetchAPI();
   }, [params.id]);
-
-  console.log(detail);
 
   genres = detail?.genres;
 
@@ -291,7 +289,13 @@ const TvSeriesDetails = ({ match }) => {
               <p>Release Date: {detail.first_air_date}</p>
             </div>
             <div className="column">
-              <a href={detail.homepage} style={{ color: "#fff" }}>
+              <a
+                href={detail.homepage}
+                target="_blank"
+                rel="noreferrer noopener"
+                onClick={window.open(detail.homepage)}
+                style={{ color: "#fff" }}
+              >
                 {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
               </a>
             </div>

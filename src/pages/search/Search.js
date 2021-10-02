@@ -1,17 +1,11 @@
-import {
-  Button,
-  createTheme,
-  Tab,
-  TextField,
-  ThemeProvider,
-} from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import "./Search.css";
-import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
-import { Tabs } from "@material-ui/core";
 import SingleContent from "../../components/singleContent/SingleContent";
 import CustomPagination from "../../components/customPagination/CustomPagination";
+import { TextField, Button, Tabs, Tab } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -22,7 +16,10 @@ const Search = () => {
 
   const darkTheme = createTheme({
     palette: {
-      type: "dark",
+      mode: "dark",
+      primary: {
+        main: "rgb(63, 81, 181)",
+      },
     },
   });
 
@@ -57,23 +54,17 @@ const Search = () => {
             className="searchBox"
             label="Search"
             variant="filled"
-            color="inherit"
-            indicatorColor="primary"
-            textColor="primary"
+            color="primary"
             onChange={(e) => setSearchText(e.target.value)}
           />
           <Button
             onClick={fetchSearch}
             variant="contained"
             style={{ marginLeft: 20 }}
+            size="large"
             type="submit"
           >
-            <SearchIcon
-              fontSize="large"
-              color="primary"
-              indicatorColor="primary"
-              type="submit"
-            />
+            <SearchIcon fontSize="large" type="submit" />
           </Button>
         </div>
 
