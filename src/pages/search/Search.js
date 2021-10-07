@@ -1,4 +1,3 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import "./Search.css";
 import axios from "axios";
@@ -13,15 +12,6 @@ const Search = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState();
   const [numOfPages, setNumOfPages] = useState();
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-      primary: {
-        main: "rgb(63, 81, 181)",
-      },
-    },
-  });
 
   const fetchSearch = async () => {
     try {
@@ -47,42 +37,40 @@ const Search = () => {
 
   return (
     <div>
-      <ThemeProvider theme={darkTheme}>
-        <div className="search">
-          <TextField
-            style={{ flex: 1 }}
-            className="searchBox"
-            label="Search"
-            variant="filled"
-            color="primary"
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <Button
-            onClick={fetchSearch}
-            variant="contained"
-            style={{ marginLeft: 20 }}
-            size="large"
-            type="submit"
-          >
-            <SearchIcon fontSize="large" type="submit" />
-          </Button>
-        </div>
-
-        <Tabs
-          value={type}
-          indicatorColor="primary"
-          textColor="inherit"
-          onChange={(event, newValue) => {
-            setType(newValue);
-            setPage(1);
-          }}
-          style={{ paddingBottom: 5 }}
-          aria-label="disabled tabs example"
+      <div className="search">
+        <TextField
+          style={{ flex: 1 }}
+          className="searchBox"
+          label="Search"
+          variant="filled"
+          color="primary"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <Button
+          onClick={fetchSearch}
+          variant="contained"
+          style={{ marginLeft: 20 }}
+          size="large"
+          type="submit"
         >
-          <Tab style={{ width: "50%" }} label="Search Movies" />
-          <Tab style={{ width: "50%" }} label="Search TV Series" />
-        </Tabs>
-      </ThemeProvider>
+          <SearchIcon fontSize="large" type="submit" />
+        </Button>
+      </div>
+
+      <Tabs
+        value={type}
+        indicatorColor="primary"
+        textColor="inherit"
+        onChange={(event, newValue) => {
+          setType(newValue);
+          setPage(1);
+        }}
+        style={{ paddingBottom: 5 }}
+        aria-label="disabled tabs example"
+      >
+        <Tab style={{ width: "50%" }} label="Search Movies" />
+        <Tab style={{ width: "50%" }} label="Search TV Series" />
+      </Tabs>
 
       <div className="trending">
         {content &&

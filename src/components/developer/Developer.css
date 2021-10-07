@@ -24,7 +24,7 @@
   display: inline-block;
   font-size: 30px;
   font-weight: 700;
-  color: #dde0fd;
+  color: var(--text-color);
   text-transform: uppercase;
 }
 
@@ -33,7 +33,7 @@
   display: block;
   font-size: 18px;
   font-weight: 600;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 .about-section .about-img {
@@ -65,7 +65,7 @@
   font-size: 16px;
   text-align: center;
   line-height: 40px;
-  color: #dde0fd;
+  color: var(--text-color);
   margin: 0 10px;
   border-radius: 50%;
   transition: all 0.3s ease;
@@ -80,7 +80,7 @@
 }
 
 .about-section .about-img .social-links a:hover {
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 .about-section .about-info {
@@ -93,13 +93,13 @@
   font-size: 18px;
   line-height: 26px;
   margin-bottom: 15px;
-  color: #dde0fd;
+  color: var(--text-color);
 }
 
 .about-section .about-info span {
   font-weight: 600;
   font-size: 18px;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 .about-section .about-info .btn-1 {
@@ -107,7 +107,7 @@
   font-weight: bold;
   padding: 10px 25px;
   font-size: 16px;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
   background-color: transparent;
   line-height: 1.5;
   cursor: pointer;

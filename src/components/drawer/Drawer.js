@@ -1,7 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import {
   AddToQueue,
@@ -36,11 +35,14 @@ const useStyles = makeStyles({
     width: 30,
     height: 30,
   },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
+  text: {
+    color: "#dde0fd",
+  },
+  icon: {
+    color: "rgb(63, 81, 181)",
+  },
+  paper: {
+    background: "#000522d0",
   },
 });
 
@@ -138,8 +140,10 @@ export default function SideDrawer({ children }) {
           const { text, icon, onClick } = item;
           return (
             <ListItem button key={index} onClick={onClick}>
-              {icon && <ListItemIcon>{icon}</ListItemIcon>}
-              <ListItemText primary={text} />
+              {icon && (
+                <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
+              )}
+              <ListItemText primary={text} className={classes.text} />
             </ListItem>
           );
         })}
@@ -151,8 +155,10 @@ export default function SideDrawer({ children }) {
           const { text, icon, onClick } = item;
           return (
             <ListItem button key={index} onClick={onClick}>
-              {icon && <ListItemIcon>{icon}</ListItemIcon>}
-              <ListItemText primary={text} />
+              {icon && (
+                <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
+              )}
+              <ListItemText primary={text} className={classes.text} />
             </ListItem>
           );
         })}
@@ -161,19 +167,18 @@ export default function SideDrawer({ children }) {
   );
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <div>
-        <React.Fragment key={"right"}>
-          <div onClick={toggleDrawer("right", true)}>{children}</div>
-          <Drawer
-            anchor={"right"}
-            open={state["right"]}
-            onClose={toggleDrawer("right", false)}
-          >
-            {list("right")}
-          </Drawer>
-        </React.Fragment>
-      </div>
-    </ThemeProvider>
+    <div>
+      <React.Fragment key={"right"}>
+        <div onClick={toggleDrawer("right", true)}>{children}</div>
+        <Drawer
+          classes={{ paper: classes.paper }}
+          anchor={"right"}
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+        >
+          {list("right")}
+        </Drawer>
+      </React.Fragment>
+    </div>
   );
 }

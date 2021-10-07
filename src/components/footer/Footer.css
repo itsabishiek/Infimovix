@@ -1,6 +1,6 @@
 footer {
   height: 100%;
-  background: #000522d0;
+  background: var(--bg-secondary);
   position: relative;
 }
 
@@ -16,20 +16,20 @@ footer .container > div {
 }
 
 footer .container h2 {
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 footer .container p {
-  color: #dde0fd;
+  color: var(--text-color);
 }
 
 footer .about-us a {
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
   line-height: 1px;
 }
 
 footer .newsletter .form-elements {
-  background: #000522d0;
+  background: var(--bg-secondary);
   display: inline-block;
 }
 
@@ -71,11 +71,11 @@ footer .rights {
 }
 
 footer .rights h4 {
-  color: #dde0fd;
+  color: var(--text-color);
 }
 
 footer .rights h4 a {
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 footer .move-up {
@@ -85,11 +85,11 @@ footer .move-up {
 }
 
 footer .move-up span {
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 footer .move-up span:hover {
-  color: #dde0fd;
+  color: var(--text-color);
   cursor: pointer;
 }
 

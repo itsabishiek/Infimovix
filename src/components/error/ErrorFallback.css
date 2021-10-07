@@ -20,12 +20,12 @@
   font-size: 1rem;
   font-weight: 550;
   cursor: pointer;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
   outline: none;
 }
 
 .fallback-btn:hover {
-  border: 2px solid rgb(63, 81, 181);
+  border: 2px solid var(--primary-color);
   background: transparent;
   color: var(--text-color);
 }

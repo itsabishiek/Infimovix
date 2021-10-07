@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Menu, Movie, People, Search, Tv, Whatshot } from "@mui/icons-material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import SideDrawer from "../drawer/Drawer";
@@ -8,15 +7,6 @@ import "./Header.css";
 
 const Header = () => {
   const [show, handleShow] = useState(false);
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-      primary: {
-        main: "rgb(63, 81, 181)",
-      },
-    },
-  });
 
   const transitionNavBar = () => {
     if (window.scrollY > 100) {
@@ -134,19 +124,17 @@ const Header = () => {
             </li> */}
             <li>
               <Link to="/search">
-                <ThemeProvider theme={darkTheme}>
-                  <Search
-                    color="primary"
-                    fontSize="medium"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                    }}
-                  />
-                </ThemeProvider>
+                <Search
+                  color="primary"
+                  fontSize="medium"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                />
               </Link>
             </li>
             <SideDrawer
@@ -157,19 +145,17 @@ const Header = () => {
               }}
             >
               <li>
-                <ThemeProvider theme={darkTheme}>
-                  <Menu
-                    fontSize="medium"
-                    color="primary"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                    }}
-                  />
-                </ThemeProvider>
+                <Menu
+                  fontSize="medium"
+                  color="primary"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                />
               </li>
             </SideDrawer>
           </ul>

@@ -1,15 +1,5 @@
 import { Pagination } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "rgb(63, 81, 181)",
-    },
-  },
-});
 
 export default function CustomPagination({ setPage, numOfPages = 30 }) {
   // Scroll to top when page changes
@@ -28,14 +18,12 @@ export default function CustomPagination({ setPage, numOfPages = 30 }) {
         marginBottom: 40,
       }}
     >
-      <ThemeProvider theme={darkTheme}>
-        <Pagination
-          count={numOfPages}
-          color="primary"
-          variant="outlined"
-          onChange={(e) => handlePageChange(e.target.textContent)}
-        />
-      </ThemeProvider>
+      <Pagination
+        count={numOfPages}
+        color="primary"
+        variant="outlined"
+        onChange={(e) => handlePageChange(e.target.textContent)}
+      />
     </div>
   );
 }

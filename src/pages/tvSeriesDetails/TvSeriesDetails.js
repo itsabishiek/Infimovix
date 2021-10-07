@@ -13,8 +13,6 @@ import {
 } from "../../config/config";
 import styled from "styled-components";
 import "./TvSeriesDetails.css";
-import { Modal } from "react-bootstrap";
-import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import { GlobalContext } from "../../context/GlobalState";
@@ -23,7 +21,21 @@ import {
   AddToQueue,
   FavoriteBorderOutlined,
   PlayCircleFilledRounded,
+  Share,
 } from "@mui/icons-material";
+import AppModal from "../../components/modal/AppModal";
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 
 const TvSeriesDetails = ({ match }) => {
   const { addMovieToWatchlist, addMovieToFavourite } =
@@ -33,7 +45,6 @@ const TvSeriesDetails = ({ match }) => {
   let genres = [];
   const [detail, setDetail] = useState([]);
   const [video, setVideo] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [images, setImages] = useState([]);
   const [poster, setPoster] = useState([]);
   const [casts, setCasts] = useState([]);
@@ -79,30 +90,6 @@ const TvSeriesDetails = ({ match }) => {
       );
     });
   }
-
-  const MoviePlayerModal = (props) => {
-    const youtubeUrl = "https://www.youtube.com/watch?v=";
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        style={{ outline: "none" }}
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body style={{ backgroundColor: "#000000", marginBottom: 10 }}>
-          <ReactPlayer
-            className="container-fluid"
-            url={youtubeUrl + video.key}
-            playing
-            width="100%"
-            controls
-          ></ReactPlayer>
-        </Modal.Body>
-      </Modal>
-    );
-  };
 
   const seriesImages = images.map((img, index) => {
     return (
@@ -180,12 +167,6 @@ const TvSeriesDetails = ({ match }) => {
 
   return (
     <>
-      <MoviePlayerModal
-        show={isOpen}
-        onHide={() => {
-          setIsOpen(false);
-        }}
-      ></MoviePlayerModal>
       <Wrapper backdrop={detail.backdrop_path && detail.backdrop_path}>
         <Content>
           <Image
@@ -247,12 +228,49 @@ const TvSeriesDetails = ({ match }) => {
               </div>
             </div>
 
-            <div className="trailer">
-              <h3 style={{ color: "rgb(63, 81, 181)" }}>Watch Trailer</h3>
-              <PlayCircleFilledRounded
-                className="play-btn"
-                onClick={() => setIsOpen(true)}
-              />
+            <div className="list-container">
+              <div className="trailer">
+                <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCH TRAILER</h3>
+                <AppModal video={video}>
+                  <PlayCircleFilledRounded className="play-btn" />
+                </AppModal>
+              </div>
+
+              <ShareWrapper className="share">
+                <h3 style={{ color: "rgb(63, 81, 181)" }}>SHARE</h3>
+                <Share className="share-btn" />
+
+                <DropDown>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 15,
+                    }}
+                  >
+                    <FacebookShareButton url={window.location.href}>
+                      <FacebookIcon size={32} round />
+                    </FacebookShareButton>
+
+                    <WhatsappShareButton url={window.location.href}>
+                      <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+
+                    <EmailShareButton url={window.location.href}>
+                      <EmailIcon size={32} round />
+                    </EmailShareButton>
+
+                    <TwitterShareButton url={window.location.href}>
+                      <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+
+                    <TelegramShareButton url={window.location.href}>
+                      <TelegramIcon size={32} round />
+                    </TelegramShareButton>
+                  </div>
+                </DropDown>
+              </ShareWrapper>
             </div>
           </Text>
         </Content>
@@ -428,18 +446,6 @@ const Text = styled.div`
     }
   }
 
-  .trailer {
-    margin-top: 20px;
-
-    .play-btn {
-      margin-top: 10px;
-      margin-left: 10px;
-      font-size: 40px;
-      cursor: pointer;
-      color: #dde0fd;
-    }
-  }
-
   .list-container {
     display: flex;
     justify-content: flex-start;
@@ -464,6 +470,34 @@ const Text = styled.div`
       margin-left: 30px;
 
       .like-btn {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 35px;
+        height: 35px;
+        padding: 8px;
+        border-radius: 50%;
+        background-color: rgb(63, 81, 181);
+        cursor: pointer;
+      }
+    }
+
+    .trailer {
+      margin-top: 20px;
+
+      .play-btn {
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 40px;
+        cursor: pointer;
+        color: #dde0fd;
+      }
+    }
+
+    .share {
+      margin-top: 20px;
+      margin-left: 10px;
+
+      .share-btn {
         margin-top: 10px;
         margin-left: 10px;
         width: 35px;
@@ -519,6 +553,35 @@ const ContentBar = styled.div`
 
     .column {
       margin: 20px 0;
+    }
+  }
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 38px;
+  left: 0px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 10px;
+  opacity: 0;
+
+  @media screen and (max-width: 500px) {
+    transform: translateX(-88px);
+  }
+  @media screen and (max-width: 400px) {
+    transform: translateX(-138px);
+  }
+`;
+
+const ShareWrapper = styled.div`
+  position: relative;
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
     }
   }
 `;

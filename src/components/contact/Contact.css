@@ -29,20 +29,20 @@
 
 .contact-section .contact-item-inner i {
   font-size: 25px;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
 }
 
 .contact-section .contact-item-inner span {
   display: block;
   font-size: 20px;
   font-weight: 600;
-  color: #dde0fd;
+  color: var(--text-color);
   margin: 15px 0 10px;
 }
 
 .contact-section .contact-item-inner p {
   font-size: 16px;
-  color: #dde0fd;
+  color: var(--text-color);
   line-height: 26px;
   margin: 0;
   word-break: break-word;
@@ -79,13 +79,13 @@
   background-color: transparent;
   font-size: 14px;
   padding: 0 15px;
-  color: #dde0fd;
+  color: var(--text-color);
   font-weight: 500;
   outline: none;
 }
 
 .contact-section .input-group .input-control::placeholder {
-  color: #dde0fd;
+  color: var(--text-color);
 }
 
 .contact-section .input-group textarea.input-control {
@@ -105,7 +105,7 @@
   font-weight: bold;
   padding: 10px 25px;
   font-size: 16px;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
   background-color: transparent;
   line-height: 1.5;
   cursor: pointer;

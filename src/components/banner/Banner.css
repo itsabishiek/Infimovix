@@ -1,22 +1,41 @@
 .banner {
   position: relative;
   display: flex;
-  color: rgb(63, 81, 181);
+  color: var(--primary-color);
   object-fit: contain;
   width: 100%;
   height: 500px;
   margin: 50px 0;
   background-attachment: fixed;
+  z-index: 1;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  z-index: 2;
 }
 
 .banner_img {
   flex: 0 0 50%;
   max-width: 50%;
+  z-index: 3;
 }
 
 .banner_img img {
   height: 500px;
   padding: 15px;
+  border-radius: 30px;
 }
 
 .banner_contents {
@@ -26,6 +45,7 @@
   height: 190px;
   padding: 100px 15px;
   text-align: right;
+  z-index: 3;
 }
 
 .banner_title {
@@ -36,6 +56,6 @@
   width: 100%;
   line-height: 1.3;
   font-size: 1.1rem;
-  color: #dde0fd;
+  color: var(--text-color);
   font-weight: normal;
 }

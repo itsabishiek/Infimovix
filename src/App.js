@@ -14,12 +14,11 @@ import Container from "@mui/material/Container";
 import MediaQuery from "react-responsive";
 import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
 import TvSeriesDetails from "./pages/tvSeriesDetails/TvSeriesDetails";
 import Developer from "./components/developer/Developer";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
-
+import { ThemeProvider } from "@mui/material";
+import darkTheme from "./components/MuiTheme";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/error/ErrorFallback";
 import { GlobalProvider } from "./context/GlobalState";
@@ -34,68 +33,64 @@ function App() {
   return (
     <GlobalProvider>
       <Router>
-        <Header />
-        <div className="app">
-          <Switch>
-            <ErrorBoundary
-              FallbackComponent={ErrorFallback}
-              onError={errorHandler}
-            >
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/movie/:id" component={MovieDetails} />
+        <ThemeProvider theme={darkTheme}>
+          <Header />
+          <div className="app">
+            <Switch>
+              <ErrorBoundary
+                FallbackComponent={ErrorFallback}
+                onError={errorHandler}
+              >
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/movie/:id" component={MovieDetails} />
 
-              <Route path="/tv/:id" component={TvSeriesDetails} />
+                <Route path="/tv/:id" component={TvSeriesDetails} />
 
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/developer">
-                <Developer />
-              </Route>
-              <Route path="/contact">
-                <Contact />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/developer">
+                  <Developer />
+                </Route>
+                <Route path="/contact">
+                  <Contact />
+                </Route>
 
-              <Container>
-                <Route path="/trending">
-                  <Trending />
-                </Route>
-                <Route path="/movies">
-                  <Movies />
-                </Route>
-                <Route path="/series">
-                  <Series />
-                </Route>
-                <Route path="/search">
-                  <Search />
-                </Route>
-                <Route path="/people">
-                  <People />
-                </Route>
-                <Route path="/watchlist">
-                  <Watchlist />
-                </Route>
-                <Route path="/liked">
-                  <Liked />
-                </Route>
-              </Container>
-            </ErrorBoundary>
+                <Container>
+                  <Route path="/trending">
+                    <Trending />
+                  </Route>
+                  <Route path="/movies">
+                    <Movies />
+                  </Route>
+                  <Route path="/series">
+                    <Series />
+                  </Route>
+                  <Route path="/search">
+                    <Search />
+                  </Route>
+                  <Route path="/people">
+                    <People />
+                  </Route>
+                  <Route path="/watchlist">
+                    <Watchlist />
+                  </Route>
+                  <Route path="/liked">
+                    <Liked />
+                  </Route>
+                </Container>
+              </ErrorBoundary>
 
-            <Route component={PageNotFound} />
-          </Switch>
-        </div>
+              <Route component={PageNotFound} />
+            </Switch>
+          </div>
 
-        <MediaQuery maxWidth={768}>
-          <SimpleBottomNavigation />
-        </MediaQuery>
+          <MediaQuery maxWidth={768}>
+            <SimpleBottomNavigation />
+          </MediaQuery>
+        </ThemeProvider>
       </Router>
     </GlobalProvider>
   );
