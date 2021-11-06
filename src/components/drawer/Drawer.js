@@ -8,6 +8,7 @@ import {
   ContactSupport,
   FavoriteOutlined,
   Home,
+  Logout,
   Movie,
   People,
   Person,
@@ -23,6 +24,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { signOut } from "@firebase/auth";
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles({
   list: {
@@ -46,13 +49,25 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SideDrawer({ children }) {
+export default function SideDrawer({ children, user, setAlert }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     right: false,
   });
 
   const history = useHistory();
+
+  const logout = () => {
+    signOut(auth);
+
+    setAlert({
+      open: true,
+      message: "Logout Successfully!",
+      type: "success",
+    });
+
+    toggleDrawer();
+  };
 
   const itemsList = [
     {
@@ -162,6 +177,14 @@ export default function SideDrawer({ children }) {
             </ListItem>
           );
         })}
+        {user && (
+          <ListItem button onClick={logout}>
+            <ListItemIcon className={classes.icon}>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary={"Logout"} className={classes.text} />
+          </ListItem>
+        )}
       </List>
     </div>
   );

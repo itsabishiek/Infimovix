@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import SimpleBottomNavigation from "./components/BottomNav";
 import Header from "./components/header/Header";
@@ -24,17 +24,37 @@ import ErrorFallback from "./components/error/ErrorFallback";
 import { GlobalProvider } from "./context/GlobalState";
 import Watchlist from "./pages/watchlist/Watchlist";
 import Liked from "./pages/liked/Liked";
+import AlertBar from "./components/AlertBar";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "./firebase";
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    type: "success",
+  });
+
   const errorHandler = (error, errorInfo) => {
     console.log("Logging", error, errorInfo);
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <GlobalProvider>
       <Router>
         <ThemeProvider theme={darkTheme}>
-          <Header />
+          <Header alert={alert} setAlert={setAlert} user={user} />
           <div className="app">
             <Switch>
               <ErrorBoundary
@@ -87,6 +107,8 @@ function App() {
             </Switch>
           </div>
 
+          <AlertBar alert={alert} setAlert={setAlert} />
+
           <MediaQuery maxWidth={768}>
             <SimpleBottomNavigation />
           </MediaQuery>
@@ -94,6 +116,6 @@ function App() {
       </Router>
     </GlobalProvider>
   );
-}
+};
 
 export default App;

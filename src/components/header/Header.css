@@ -42,16 +42,6 @@
 
 .header_items img {
   height: 50px;
-  animation: hue 10s infinite alternate;
-}
-
-@keyframes hue {
-  from {
-    filter: hue-rotate(0deg);
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
 }
 
 .header_show {

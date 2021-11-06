@@ -321,12 +321,7 @@ const MovieDetails = ({ match }) => {
               <p>Release Date: {detail.release_date}</p>
             </div>
             <div className="column">
-              <a
-                href={detail.homepage}
-                target="_blank"
-                rel="noreferrer noopener"
-                style={{ color: "#fff" }}
-              >
+              <a href={detail.homepage} style={{ color: "#fff" }}>
                 {detail.homepage === ""
                   ? "Unavailable"
                   : truncate(detail.homepage, 40)}

@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Menu, Movie, People, Search, Tv, Whatshot } from "@mui/icons-material";
+import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AuthModal from "../AuthModal";
 import SideDrawer from "../drawer/Drawer";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ alert, setAlert, user }) => {
   const [show, handleShow] = useState(false);
 
   const transitionNavBar = () => {
@@ -116,12 +118,23 @@ const Header = () => {
           <ul>
             {/* <li className="login">
               <a href="/login">Login</a>
-            </li>
-            <li>
-              <a href="/register" className="join_btn">
-                Join
-              </a>
             </li> */}
+
+            {user ? (
+              <Avatar
+                src={user.photoURL}
+                alt={user.displayName || user.email}
+                style={{
+                  height: 35,
+                  width: 35,
+                  cursor: "pointer",
+                  backgroundColor: "var(--primary-color)",
+                }}
+              />
+            ) : (
+              <AuthModal alert={alert} setAlert={setAlert} />
+            )}
+
             <li>
               <Link to="/search">
                 <Search
@@ -143,6 +156,8 @@ const Header = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
+              user={user}
+              setAlert={setAlert}
             >
               <li>
                 <Menu

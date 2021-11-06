@@ -1,14 +1,11 @@
-import firebase from "firebase";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import firebaseConfig from "./config/firebaseConfig";
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBhFjnl920CRUAYWD8BMl5XlS9uv4IlWA8",
-  authDomain: "infimovix.firebaseapp.com",
-  projectId: "infimovix",
-  storageBucket: "infimovix.appspot.com",
-  messagingSenderId: "1096391636853",
-  appId: "1:1096391636853:web:2834fef605fcda9b48053c",
-};
+const firebaseApp = initializeApp(firebaseConfig);
 
-const fire = firebase.initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
-export default fire;
+export { auth, db };

@@ -57,7 +57,7 @@ const Contact = () => {
             <div className="contact-item-inner outer-shadow">
               <i className="fas fa-envelope"></i>
               <span>Email</span>
-              <p>s.abishiek007@gmail.com</p>
+              <p>itsabishiek@gmail.com</p>
             </div>
           </div>
 
@@ -81,6 +81,7 @@ const Contact = () => {
                     <input
                       type="text"
                       placeholder="Name"
+                      required
                       className="input-control"
                       name="name"
                     />
@@ -89,6 +90,7 @@ const Contact = () => {
                     <input
                       type="email"
                       placeholder="Email"
+                      required
                       className="input-control"
                       name="email"
                     />
@@ -97,6 +99,7 @@ const Contact = () => {
                     <input
                       type="text"
                       placeholder="Subject"
+                      required
                       className="input-control"
                       name="subject"
                     />
@@ -108,6 +111,7 @@ const Contact = () => {
                     <textarea
                       placeholder="Your Message"
                       className="input-control"
+                      required
                       name="message"
                     />
                   </div>

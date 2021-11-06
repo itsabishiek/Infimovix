@@ -307,13 +307,7 @@ const TvSeriesDetails = ({ match }) => {
               <p>Release Date: {detail.first_air_date}</p>
             </div>
             <div className="column">
-              <a
-                href={detail.homepage}
-                target="_blank"
-                rel="noreferrer noopener"
-                onClick={window.open(detail.homepage)}
-                style={{ color: "#fff" }}
-              >
+              <a href={detail.homepage} style={{ color: "#fff" }}>
                 {detail.homepage === "" ? "..." : truncate(detail.homepage, 40)}
               </a>
             </div>
