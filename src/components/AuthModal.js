@@ -20,6 +20,7 @@ const style = {
   boxShadow: 24,
   borderRadius: 3,
   backgroundColor: "#000522d0",
+  outline: "none",
 };
 
 const AuthModal = ({ alert, setAlert }) => {
@@ -115,7 +116,7 @@ const AuthModal = ({ alert, setAlert }) => {
 
               <Button
                 startIcon={<Google />}
-                variant="contained"
+                variant="outlined"
                 style={{ width: "100%", outline: "none" }}
                 onClick={signInWithGoogle}
               >

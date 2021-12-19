@@ -116,10 +116,6 @@ const Header = ({ alert, setAlert, user }) => {
         </div>
         <div className="join_container">
           <ul>
-            {/* <li className="login">
-              <a href="/login">Login</a>
-            </li> */}
-
             {user ? (
               <Avatar
                 src={user.photoURL}
@@ -128,6 +124,7 @@ const Header = ({ alert, setAlert, user }) => {
                   height: 35,
                   width: 35,
                   cursor: "pointer",
+                  objectFit: "cover",
                   backgroundColor: "var(--primary-color)",
                 }}
               />

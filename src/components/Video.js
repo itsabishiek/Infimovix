@@ -12,6 +12,7 @@ import {
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
+import { CircularProgress } from "@mui/material";
 
 const Video = ({ video }) => {
   const opts = {
@@ -24,7 +25,19 @@ const Video = ({ video }) => {
   };
   return (
     <div>
-      <YouTube className="video-youtube" videoId={video?.key} opts={opts} />
+      {video ? (
+        <YouTube className="video-youtube" videoId={video?.key} opts={opts} />
+      ) : (
+        <CircularProgress
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: 250,
+          }}
+        />
+      )}
 
       <div
         style={{

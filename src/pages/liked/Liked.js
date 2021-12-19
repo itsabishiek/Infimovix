@@ -17,11 +17,17 @@ const Liked = () => {
 
   return (
     <div>
-      <span className="pageTitle">My Favourite Movies</span>
+      <span className="pageTitle" style={{ marginBottom: 18 }}>
+        My Favourite Movies
+      </span>
 
       <AppBar
         position="static"
-        style={{ borderRadius: 10, backgroundColor: "#000522d0" }}
+        style={{
+          borderRadius: 10,
+          backgroundColor: "#000522d0",
+          marginBottom: 40,
+        }}
       >
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
           <Tab label="Movies" />

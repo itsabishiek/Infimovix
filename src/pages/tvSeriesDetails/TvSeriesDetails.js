@@ -129,7 +129,9 @@ const TvSeriesDetails = ({ match }) => {
             height: "260px",
             objectFit: "contain",
           }}
-          src={cast.img ? `${img_500}${cast.img}` : unavailable}
+          src={
+            cast.profile_path ? `${img_500}${cast.profile_path}` : unavailable
+          }
           alt={cast.name}
         />
         <p style={{ color: "#dde0fd" }}>{cast.name}</p>

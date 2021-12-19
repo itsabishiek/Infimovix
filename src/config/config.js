@@ -211,14 +211,14 @@ export const fetchCasts = async (id) => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
-    const modifiedData = data["cast"].map((c) => ({
-      id: c["cast_id"],
-      character: c["character"],
-      name: c["name"],
-      img: "https://image.tmdb.org/t/p/w200" + c["profile_path"],
-    }));
+    // const modifiedData = data["cast"].map((c) => ({
+    //   id: c["cast_id"],
+    //   character: c["character"],
+    //   name: c["name"],
+    //   img: "https://image.tmdb.org/t/p/w200" + c["profile_path"],
+    // }));
 
-    return modifiedData;
+    return data.cast;
   } catch (error) {}
 };
 
@@ -452,14 +452,14 @@ export const fetchSeriesCasts = async (id) => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
-    const modifiedData = data["cast"].map((c) => ({
-      id: c["cast_id"],
-      character: c["character"],
-      name: c["name"],
-      img: "https://image.tmdb.org/t/p/w200" + c["profile_path"],
-    }));
+    // const modifiedData = data["cast"].map((c) => ({
+    //   id: c["cast_id"],
+    //   character: c["character"],
+    //   name: c["name"],
+    //   img: "https://image.tmdb.org/t/p/w200" + c["profile_path"],
+    // }));
 
-    return modifiedData;
+    return data.cast;
   } catch (error) {}
 };
 

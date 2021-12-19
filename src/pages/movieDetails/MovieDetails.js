@@ -129,6 +129,7 @@ const MovieDetails = ({ match }) => {
   });
 
   const castList = casts.map((cast, index) => {
+    console.log(cast);
     return (
       <div key={index} className="cast_posters">
         <img
@@ -137,7 +138,9 @@ const MovieDetails = ({ match }) => {
             height: "260px",
             objectFit: "contain",
           }}
-          src={cast.img ? `${img_500}${cast.img}` : unavailable}
+          src={
+            cast.profile_path ? `${img_500}${cast.profile_path}` : unavailable
+          }
           alt={cast.name}
         />
         <p style={{ color: "#dde0fd" }}>{cast.name}</p>
@@ -223,7 +226,7 @@ const MovieDetails = ({ match }) => {
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
                 <AddToQueue
                   className="watchlist-btn"
-                  disabled={() => watchlistDisabled()}
+                  disabled={watchlistDisabled}
                   onClick={() => {
                     addMovieToWatchlist(detail);
                     notifyWatchlist();
