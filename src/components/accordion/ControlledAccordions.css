@@ -1,0 +1,23 @@
+.accordion-details {
+  display: flex;
+}
+
+.accordion-contents {
+  margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+  .accordion-details {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .accordion-release-date {
+    display: none;
+  }
+  .accordion-img {
+    width: 100%;
+    object-fit: cover;
+  }
+}

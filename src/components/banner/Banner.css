@@ -36,6 +36,7 @@
   height: 500px;
   padding: 15px;
   border-radius: 30px;
+  cursor: pointer;
 }
 
 .banner_contents {

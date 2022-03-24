@@ -27,6 +27,7 @@ import Liked from "./pages/liked/Liked";
 import AlertBar from "./components/AlertBar";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth } from "./firebase";
+import PersonDetails from "./pages/personDetails/PersonDetails";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -49,6 +50,8 @@ const App = () => {
       }
     });
   }, []);
+
+  // console.log(user);
 
   return (
     <GlobalProvider>
@@ -76,6 +79,10 @@ const App = () => {
                 </Route>
                 <Route path="/contact">
                   <Contact />
+                </Route>
+
+                <Route path="/person/:id">
+                  <PersonDetails />
                 </Route>
 
                 <Container>

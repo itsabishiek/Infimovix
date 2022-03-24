@@ -1,0 +1,107 @@
+.person-details-container {
+  padding: 30px 45px;
+  display: flex;
+}
+
+.person-details-sidebar {
+  margin-right: 30px;
+}
+
+.person-details-img {
+  border-radius: 10px;
+}
+
+.person-details-info h2 {
+  font-size: 23px;
+  color: var(--primary-color);
+}
+
+.person-details-info p {
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: 0.5px;
+}
+
+.person-details-info p p {
+  padding: 0 0 22px;
+}
+
+.person-details-known-for {
+  margin-bottom: 20px;
+}
+
+.person-details-known-for h3 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.person-details-known-for h5 {
+  margin: 0;
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.person-details-known {
+  margin-bottom: 20px;
+}
+
+.person-details-known h3 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.person-details-known h5 {
+  margin: 0;
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.person-details-credits {
+  display: flex;
+  align-items: center;
+}
+
+.person-details-credits p {
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  .person-details-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .person-details-sidebar {
+    margin-right: 0;
+  }
+  .person-details-sidebar img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .person-details-known-for {
+    display: flex;
+    align-items: center;
+  }
+  .person-details-known-for h5 {
+    margin-top: 0px;
+    margin-left: 15px;
+  }
+  .person-details-known {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+  }
+  .person-details-known h5 {
+    margin-top: 0;
+    /* margin-bottom: 10px; */
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .person-details-container {
+    padding: 10px 18px;
+  }
+}

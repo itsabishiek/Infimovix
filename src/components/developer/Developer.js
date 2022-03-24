@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./Developer.css";
 
@@ -23,19 +22,19 @@ const Developer = () => {
             </div>
 
             <div className="social-links">
-              <a href="#" className="outer-shadow hover-in-shadow">
+              <a href="/" className="outer-shadow hover-in-shadow">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="outer-shadow hover-in-shadow">
+              <a href="/" className="outer-shadow hover-in-shadow">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#" className="outer-shadow hover-in-shadow">
+              <a href="/" className="outer-shadow hover-in-shadow">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="#" className="outer-shadow hover-in-shadow">
+              <a href="/" className="outer-shadow hover-in-shadow">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="#" className="outer-shadow hover-in-shadow">
+              <a href="/" className="outer-shadow hover-in-shadow">
                 <i className="fab fa-youtube"></i>
               </a>
             </div>
@@ -56,10 +55,10 @@ const Developer = () => {
               perferendis minima beatae debitis, nostrum hic iure ab, modi,
               eveniet porro officiis.
             </p>
-            <a href="#" className="btn-1 outer-shadow hover-in-shadow">
+            <a href="/" className="btn-1 outer-shadow hover-in-shadow">
               Download CV
             </a>
-            <a href="#" className="btn-1 outer-shadow hover-in-shadow">
+            <a href="/" className="btn-1 outer-shadow hover-in-shadow">
               Hire Me
             </a>
           </div>

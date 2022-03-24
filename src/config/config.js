@@ -2,6 +2,8 @@ import axios from "axios";
 
 //image sizes for tmdb
 export const img_base = "https://image.tmdb.org/t/p/original";
+export const img_100 = "https://image.tmdb.org/t/p/w100";
+export const img_200 = "https://image.tmdb.org/t/p/w200";
 export const img_300 = "https://image.tmdb.org/t/p/w300";
 export const img_500 = "https://image.tmdb.org/t/p/w500";
 export const img_780 = "http://image.tmdb.org/t/p/w780";
@@ -27,12 +29,13 @@ const movieUrl = `${url}/movie`;
 const seriesUrl = `${url}/tv`;
 const genreUrl = `${url}/genre/movie/list`;
 const moviesUrl = `${url}/discover/movie`;
-const personUrl = `${url}/trending/person/week`;
+const personUrl = `${url}/trending/person`;
 const netflixOriginalsUrl = `${url}/discover/tv`;
 const comedyMovies = `${url}/discover/movie`;
 const horrorMovies = `${url}/discover/movie`;
 const romanceMovies = `${url}/discover/movie`;
 const documentaries = `${url}/discover/movie`;
+const personDetailUrl = `${url}/person`;
 
 export const requests = {
   fetchBanner: `${url}/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`,
@@ -112,6 +115,9 @@ export const fetchPersons = async () => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
+
+    console.log(data.results);
+
     const modifiedData = data["results"].map((p) => ({
       id: p["id"],
       popularity: p["popularity"],
@@ -119,7 +125,50 @@ export const fetchPersons = async () => {
       profileImg: "https://image.tmdb.org/t/p/w200" + p["profile_path"],
       known: p["known_for_department"],
     }));
+
     return modifiedData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchPersonDetails = async (id) => {
+  try {
+    const { data } = await axios.get(`${personDetailUrl}/${id}`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchPersonMovieCredits = async (id) => {
+  try {
+    const { data } = await axios.get(`${personDetailUrl}/${id}/movie_credits`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchPersonTVCredits = async (id) => {
+  try {
+    const { data } = await axios.get(`${personDetailUrl}/${id}/tv_credits`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY,
+      },
+    });
+
+    return data;
   } catch (error) {
     console.log(error);
   }

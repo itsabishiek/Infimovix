@@ -39,6 +39,8 @@ import {
   WhatsappShareButton,
 } from "react-share";
 
+// https://api.themoviedb.org/3/movie/634649/watch/providers?api_key=52e28db24f9bc94a1c0fce73f9812764
+
 const MovieDetails = ({ match }) => {
   const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
     useContext(GlobalContext);
@@ -129,20 +131,23 @@ const MovieDetails = ({ match }) => {
   });
 
   const castList = casts.map((cast, index) => {
-    console.log(cast);
+    // console.log(cast);
     return (
       <div key={index} className="cast_posters">
-        <img
-          className="cast_poster"
-          style={{
-            height: "260px",
-            objectFit: "contain",
-          }}
-          src={
-            cast.profile_path ? `${img_500}${cast.profile_path}` : unavailable
-          }
-          alt={cast.name}
-        />
+        <Link to={`/person/${cast.id}`}>
+          <img
+            className="cast_poster"
+            style={{
+              height: "260px",
+              objectFit: "contain",
+            }}
+            src={
+              cast.profile_path ? `${img_500}${cast.profile_path}` : unavailable
+            }
+            alt={cast.name}
+          />
+        </Link>
+
         <p style={{ color: "#dde0fd" }}>{cast.name}</p>
         <p style={{ color: "rgb(63, 81, 181)" }}>{cast.character}</p>
       </div>

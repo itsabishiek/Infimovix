@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { requests } from "../../config/config";
 import "./Banner.css";
 
@@ -23,6 +24,8 @@ const Banner = () => {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
+  // console.log(banner);
+
   return (
     <div
       className="banner"
@@ -33,10 +36,12 @@ const Banner = () => {
       }}
     >
       <div className="banner_img">
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${banner?.poster_path}`}
-          alt={banner?.title}
-        />
+        <Link to={`/${banner?.media_type}/${banner?.id}`}>
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${banner?.poster_path}`}
+            alt={banner?.title}
+          />
+        </Link>
       </div>
 
       <div className="banner_contents">

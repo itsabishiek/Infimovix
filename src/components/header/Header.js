@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Menu, Movie, People, Search, Tv, Whatshot } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthModal from "../AuthModal";
@@ -27,18 +25,21 @@ const Header = ({ alert, setAlert, user }) => {
   return (
     <div className={`header ${show && "header_show"}`}>
       <div className="header_items">
-        <Link
-          to="/"
-          className="brand_container"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img src="/logo.png" alt="" />
-          <span>InfiMovix</span>
-        </Link>
+        <div>
+          <Link
+            to="/"
+            className="brand_container"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img src="/logo.png" alt="" />
+            <span>InfiMovix</span>
+          </Link>
+        </div>
+
         <div className="nav_items">
           <ul>
             <li>
@@ -114,10 +115,11 @@ const Header = ({ alert, setAlert, user }) => {
             </li>
           </ul>
         </div>
+
         <div className="join_container">
           <ul>
             {user ? (
-              <Avatar
+              <img
                 src={user.photoURL}
                 alt={user.displayName || user.email}
                 style={{
@@ -125,6 +127,7 @@ const Header = ({ alert, setAlert, user }) => {
                   width: 35,
                   cursor: "pointer",
                   objectFit: "cover",
+                  borderRadius: "50%",
                   backgroundColor: "var(--primary-color)",
                 }}
               />
