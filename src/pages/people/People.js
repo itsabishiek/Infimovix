@@ -9,7 +9,6 @@ const People = () => {
   const [persons, setPersons] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
 
   const fetchPersons = async () => {
     try {
@@ -63,15 +62,6 @@ const People = () => {
       <h2 style={{ textAlign: "center", color: "#dde0fd", marginTop: 25 }}>
         TRENDING PERSONS ON THIS WEEK
       </h2>
-
-      <div className="people-search">
-        <input
-          className="people-search-input"
-          type="text"
-          placeholder="Search peoples here..."
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </div>
 
       <div className="trending_persons">{trendingPersons}</div>
       {numOfPages > 1 && (

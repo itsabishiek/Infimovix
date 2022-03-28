@@ -26,31 +26,6 @@
   border-color: var(--primary-color);
 }
 
-.people-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 30px 0;
-}
-
-.people-search .people-search-input {
-  background-color: #050b4db9;
-  border: none;
-  width: 70%;
-  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
-    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
-  height: 35px;
-  outline: none;
-  color: #eee;
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 5px 15px;
-}
-
-.people-search .people-search-input::placeholder {
-  color: rgb(196, 196, 196);
-}
-
 @media (max-width: 768px) {
   .persons_img {
     height: 250px;

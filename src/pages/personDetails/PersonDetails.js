@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
+  fetchCombinedCredits,
   fetchPersonDetails,
   fetchPersonMovieCredits,
   fetchPersonTVCredits,
   img_200,
-  img_300,
+  img_500,
   unavailable,
 } from "../../config/config";
 import { AppBar, Tab, Tabs } from "@mui/material";
@@ -19,6 +20,7 @@ const PersonDetails = () => {
   const [personDetails, setPersonDetails] = useState([]);
   const [personMovieCredits, setPersonMovieCredits] = useState([]);
   const [personTVCredits, setPersonTVCredits] = useState([]);
+  const [personCombinedCredits, setPersonCombinedCredits] = useState([]);
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -27,24 +29,27 @@ const PersonDetails = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
+      window.scroll(0, 0);
       setPersonDetails(await fetchPersonDetails(personId));
       setPersonMovieCredits(await fetchPersonMovieCredits(personId));
       setPersonTVCredits(await fetchPersonTVCredits(personId));
+      setPersonCombinedCredits(await fetchCombinedCredits(personId));
     };
 
     fetchAPI();
   }, [personId]);
 
   // console.log(personDetails);
-  console.log(personMovieCredits);
-  console.log(personTVCredits);
+  // console.log(personMovieCredits);
+  // console.log(personTVCredits);
+  console.log(personCombinedCredits);
 
   return (
     <div className="person-details-container">
       <div className="person-details-sidebar">
         <img
           className="person-details-img"
-          src={`${img_300}${personDetails.profile_path}`}
+          src={`${img_500}${personDetails.profile_path}`}
           alt=""
         />
 
@@ -92,6 +97,7 @@ const PersonDetails = () => {
           </div>
         </div>
       </div>
+
       <div className="person-details-info">
         <h1>{personDetails.name}</h1>
         <h2>Biography</h2>

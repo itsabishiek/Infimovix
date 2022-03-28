@@ -2,7 +2,6 @@ import axios from "axios";
 
 //image sizes for tmdb
 export const img_base = "https://image.tmdb.org/t/p/original";
-export const img_100 = "https://image.tmdb.org/t/p/w100";
 export const img_200 = "https://image.tmdb.org/t/p/w200";
 export const img_300 = "https://image.tmdb.org/t/p/w300";
 export const img_500 = "https://image.tmdb.org/t/p/w500";
@@ -29,7 +28,7 @@ const movieUrl = `${url}/movie`;
 const seriesUrl = `${url}/tv`;
 const genreUrl = `${url}/genre/movie/list`;
 const moviesUrl = `${url}/discover/movie`;
-const personUrl = `${url}/trending/person`;
+const personUrl = `${url}/trending/person/week`;
 const netflixOriginalsUrl = `${url}/discover/tv`;
 const comedyMovies = `${url}/discover/movie`;
 const horrorMovies = `${url}/discover/movie`;
@@ -108,25 +107,16 @@ export const fetchMovieByGenre = async (genre_id) => {
   } catch (error) {}
 };
 
-export const fetchPersons = async () => {
+export const fetchPersons = async (page) => {
   try {
-    const { data } = await axios.get(personUrl, {
+    const { data } = await axios.get(`${personUrl}`, {
       params: {
         api_key: process.env.REACT_APP_API_KEY,
+        page: page,
       },
     });
 
-    console.log(data.results);
-
-    const modifiedData = data["results"].map((p) => ({
-      id: p["id"],
-      popularity: p["popularity"],
-      name: p["name"],
-      profileImg: "https://image.tmdb.org/t/p/w200" + p["profile_path"],
-      known: p["known_for_department"],
-    }));
-
-    return modifiedData;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -167,6 +157,23 @@ export const fetchPersonTVCredits = async (id) => {
         api_key: process.env.REACT_APP_API_KEY,
       },
     });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchCombinedCredits = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `${personDetailUrl}/${id}/combined_credits`,
+      {
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+        },
+      }
+    );
 
     return data;
   } catch (error) {

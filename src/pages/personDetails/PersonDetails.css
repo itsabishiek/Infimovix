@@ -9,6 +9,12 @@
 
 .person-details-img {
   border-radius: 10px;
+  height: 430px;
+}
+
+.person-details-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .person-details-info h2 {
@@ -58,15 +64,6 @@
   font-size: 16px;
 }
 
-.person-details-credits {
-  display: flex;
-  align-items: center;
-}
-
-.person-details-credits p {
-  margin-right: 20px;
-}
-
 @media (max-width: 768px) {
   .person-details-container {
     flex-direction: column;
@@ -93,10 +90,11 @@
     align-items: center;
     gap: 5px;
   }
+  .person-details-known h3 {
+    margin-right: 10px;
+  }
   .person-details-known h5 {
     margin-top: 0;
-    /* margin-bottom: 10px; */
-    margin-left: 15px;
   }
 }
 

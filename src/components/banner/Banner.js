@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -53,6 +54,12 @@ const Banner = () => {
           <h1 className="banner_description">
             {truncate(banner?.overview, 250)}
           </h1>
+
+          <Link to={`/${banner?.media_type}/${banner?.id}`}>
+            <Button variant="contained" style={{ marginTop: 15 }}>
+              Explore
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
