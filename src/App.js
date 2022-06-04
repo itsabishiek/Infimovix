@@ -67,9 +67,13 @@ const App = () => {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route path="/movie/:id" component={MovieDetails} />
+                <Route path="/movie/:id">
+                  <MovieDetails user={user} />
+                </Route>
 
-                <Route path="/tv/:id" component={TvSeriesDetails} />
+                <Route path="/tv/:id">
+                  <TvSeriesDetails user={user} />
+                </Route>
 
                 <Route path="/about">
                   <About />

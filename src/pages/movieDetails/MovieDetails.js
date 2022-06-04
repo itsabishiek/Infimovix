@@ -15,7 +15,7 @@ import {
 import styled from "styled-components";
 import "./MovieDetails.css";
 import { calcTime, convertMoney } from "../../helpers/Helpers";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import { GlobalContext } from "../../context/GlobalState";
 import { toast } from "react-toastify";
@@ -41,11 +41,12 @@ import {
 
 // https://api.themoviedb.org/3/movie/634649/watch/providers?api_key=52e28db24f9bc94a1c0fce73f9812764
 
-const MovieDetails = ({ match }) => {
+const MovieDetails = ({ user }) => {
   const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
     useContext(GlobalContext);
+  const params = useParams();
 
-  let params = match.params;
+  // let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
   const [crew, setCrew] = useState([]);
@@ -59,14 +60,14 @@ const MovieDetails = ({ match }) => {
 
   const watchlistDisabled = storedMovie ? true : false;
 
-  const notifyWatchlist = () => {
-    toast.dark("Movie added to your watchlist.", {
+  const notifyWatchlist = (msg) => {
+    toast.dark(msg, {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
-  const notifyFavourite = () => {
-    toast.dark("Movie added to your favourites.", {
+  const notifyFavourite = (msg) => {
+    toast.dark(msg, {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
@@ -229,25 +230,48 @@ const MovieDetails = ({ match }) => {
             <div className="list-container">
               <div className="watchlist">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
-                <AddToQueue
-                  className="watchlist-btn"
-                  disabled={watchlistDisabled}
-                  onClick={() => {
-                    addMovieToWatchlist(detail);
-                    notifyWatchlist();
-                  }}
-                />
+                {user ? (
+                  <AddToQueue
+                    className="watchlist-btn"
+                    disabled={watchlistDisabled}
+                    onClick={() => {
+                      addMovieToWatchlist(detail);
+                      notifyWatchlist("Movie added to your watchlist.");
+                    }}
+                  />
+                ) : (
+                  <AddToQueue
+                    className="watchlist-btn"
+                    disabled={watchlistDisabled}
+                    onClick={() => {
+                      notifyWatchlist(
+                        "You need to logged in to add to watchlist."
+                      );
+                    }}
+                  />
+                )}
               </div>
 
               <div className="like">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>FAVOURITE</h3>
-                <FavoriteBorderOutlined
-                  className="like-btn"
-                  onClick={() => {
-                    addMovieToFavourite(detail);
-                    notifyFavourite();
-                  }}
-                />
+                {user ? (
+                  <FavoriteBorderOutlined
+                    className="like-btn"
+                    onClick={() => {
+                      addMovieToFavourite(detail);
+                      notifyFavourite("Movie added to your favourites.");
+                    }}
+                  />
+                ) : (
+                  <FavoriteBorderOutlined
+                    className="like-btn"
+                    onClick={() => {
+                      notifyFavourite(
+                        "You need to logged in to add to favorites."
+                      );
+                    }}
+                  />
+                )}
               </div>
             </div>
 

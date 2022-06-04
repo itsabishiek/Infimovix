@@ -100,16 +100,6 @@ export default function SideDrawer({ children, user, setAlert }) {
       icon: <People />,
       onClick: () => history.push("/people"),
     },
-    {
-      text: "My Watchlist",
-      icon: <AddToQueue />,
-      onClick: () => history.push("/watchlist"),
-    },
-    {
-      text: "My Favourites",
-      icon: <FavoriteOutlined />,
-      onClick: () => history.push("/liked"),
-    },
   ];
 
   const policyList = [
@@ -162,6 +152,27 @@ export default function SideDrawer({ children, user, setAlert }) {
             </ListItem>
           );
         })}
+
+        {user && (
+          <>
+            <ListItem button onClick={() => history.push("/watchlist")}>
+              <ListItemIcon className={classes.icon}>
+                <AddToQueue />
+              </ListItemIcon>
+              <ListItemText primary={"My Watchlist"} className={classes.text} />
+            </ListItem>
+
+            <ListItem button onClick={() => history.push("/liked")}>
+              <ListItemIcon className={classes.icon}>
+                <FavoriteOutlined />
+              </ListItemIcon>
+              <ListItemText
+                primary={"My Favourites"}
+                className={classes.text}
+              />
+            </ListItem>
+          </>
+        )}
       </List>
 
       <Divider />

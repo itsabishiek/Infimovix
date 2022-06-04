@@ -13,7 +13,7 @@ import {
 } from "../../config/config";
 import styled from "styled-components";
 import "./TvSeriesDetails.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import { GlobalContext } from "../../context/GlobalState";
 import { toast } from "react-toastify";
@@ -37,11 +37,12 @@ import {
   WhatsappShareButton,
 } from "react-share";
 
-const TvSeriesDetails = ({ match }) => {
+const TvSeriesDetails = ({ user }) => {
   const { addMovieToWatchlist, addMovieToFavourite } =
     useContext(GlobalContext);
+  const params = useParams();
 
-  let params = match.params;
+  // let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
   const [video, setVideo] = useState([]);
@@ -50,14 +51,14 @@ const TvSeriesDetails = ({ match }) => {
   const [casts, setCasts] = useState([]);
   const [similarSeries, setSimilarSeries] = useState([]);
 
-  const notifyWatchlist = () => {
-    toast.dark("TV show added to your watchlist.", {
+  const notifyWatchlist = (msg) => {
+    toast.dark(msg, {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
-  const notifyFavourite = () => {
-    toast.dark("TV show added to your favourites.", {
+  const notifyFavourite = (msg) => {
+    toast.dark(msg, {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
@@ -212,24 +213,46 @@ const TvSeriesDetails = ({ match }) => {
             <div className="list-container">
               <div className="watchlist">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
-                <AddToQueue
-                  className="watchlist-btn"
-                  onClick={() => {
-                    addMovieToWatchlist(detail);
-                    notifyWatchlist();
-                  }}
-                />
+                {user ? (
+                  <AddToQueue
+                    className="watchlist-btn"
+                    onClick={() => {
+                      addMovieToWatchlist(detail);
+                      notifyWatchlist("TV show added to your watchlist.");
+                    }}
+                  />
+                ) : (
+                  <AddToQueue
+                    className="watchlist-btn"
+                    onClick={() => {
+                      notifyWatchlist(
+                        "You need to logged in to add to watchlist."
+                      );
+                    }}
+                  />
+                )}
               </div>
 
               <div className="like">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>FAVOURITE</h3>
-                <FavoriteBorderOutlined
-                  className="like-btn"
-                  onClick={() => {
-                    addMovieToFavourite(detail);
-                    notifyFavourite();
-                  }}
-                />
+                {user ? (
+                  <FavoriteBorderOutlined
+                    className="like-btn"
+                    onClick={() => {
+                      addMovieToFavourite(detail);
+                      notifyFavourite("TV show added to your favourites.");
+                    }}
+                  />
+                ) : (
+                  <FavoriteBorderOutlined
+                    className="like-btn"
+                    onClick={() => {
+                      notifyFavourite(
+                        "You need to logged in to add to favorites."
+                      );
+                    }}
+                  />
+                )}
               </div>
             </div>
 
