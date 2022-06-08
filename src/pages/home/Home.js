@@ -15,6 +15,7 @@ import {
   img_base,
   unavailable,
 } from "../../config/config";
+import { Skeleton } from "@mui/material";
 import "./Home.css";
 
 const Home = () => {
@@ -25,17 +26,32 @@ const Home = () => {
   const [horrorMovies, setHorrorMovies] = useState([]);
   const [romanceMovies, setRomanceMovies] = useState([]);
   const [documentaries, setDocumentaries] = useState([]);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     const fetchAPI = async () => {
+      setLoading(true);
       setNetOriginals(await fetchNetflixOriginals());
+      setLoading(false);
+      setLoading(true);
       setMovieList(await fetchMovieByGenre());
+      setLoading(false);
+      setLoading(true);
       setTopRated(await fetchTopratedMovie());
+      setLoading(false);
+      setLoading(true);
       setComedyMovies(await fetchComedyMovies());
+      setLoading(false);
+      setLoading(true);
       setHorrorMovies(await fetchHorrorMovies());
+      setLoading(false);
+      setLoading(true);
       setRomanceMovies(await fetchRomanceMovies());
+      setLoading(false);
+      setLoading(true);
       setDocumentaries(await fetchDocumentaries());
+      setLoading(false);
     };
 
     fetchAPI();
@@ -45,11 +61,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/tv/${item.id}`}>
-          <img
-            className="home_poster"
-            src={`${img_base}${item.poster}`}
-            alt={item.name}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={`${img_base}${item.poster}`}
+              alt={item.name}
+            />
+          )}
         </Link>
       </div>
     );
@@ -59,11 +84,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );
@@ -73,11 +107,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );
@@ -87,11 +130,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );
@@ -101,11 +153,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );
@@ -115,11 +176,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );
@@ -129,11 +199,20 @@ const Home = () => {
     return (
       <div key={index}>
         <Link to={`/movie/${item.id}`}>
-          <img
-            className="home_poster"
-            src={item.poster ? item.poster : unavailable}
-            alt={item.title}
-          />
+          {loading ? (
+            <Skeleton
+              style={{ borderRadius: 15, marginRight: 20 }}
+              variant="rectangular"
+              width={168}
+              height={250}
+            />
+          ) : (
+            <img
+              className="home_poster"
+              src={item.poster ? item.poster : unavailable}
+              alt={item.title}
+            />
+          )}
         </Link>
       </div>
     );

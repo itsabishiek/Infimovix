@@ -7,14 +7,17 @@ import "./Trending.css";
 const Trending = () => {
   const [content, setContent] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const fetchTrending = async () => {
+    setLoading(true);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
     );
 
     // console.log(data);
     setContent(data.results);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,6 +40,7 @@ const Trending = () => {
               date={c.first_air_date || c.release_date}
               media_type={c.media_type}
               vote_average={c.vote_average}
+              loading={loading}
             />
           ))}
       </div>

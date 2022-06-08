@@ -13,8 +13,10 @@ const Movies = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genreforURL = useGenre(selectedGenres);
+  const [loading, setLoading] = useState(false);
 
   const fetchMovies = async () => {
+    setLoading(true);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
@@ -22,6 +24,7 @@ const Movies = () => {
     // console.log(data);
     setContent(data.results);
     setNumOfPages(data.total_pages);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const Movies = () => {
               date={c.first_air_date || c.release_date}
               media_type="movie"
               vote_average={c.vote_average}
+              loading={loading}
             />
           ))}
       </div>

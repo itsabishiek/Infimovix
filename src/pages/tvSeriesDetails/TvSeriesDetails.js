@@ -36,6 +36,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { CircularProgress } from "@mui/material";
 
 const TvSeriesDetails = ({ user }) => {
   const { addMovieToWatchlist, addMovieToFavourite } =
@@ -50,6 +51,7 @@ const TvSeriesDetails = ({ user }) => {
   const [poster, setPoster] = useState([]);
   const [casts, setCasts] = useState([]);
   const [similarSeries, setSimilarSeries] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const notifyWatchlist = (msg) => {
     toast.dark(msg, {
@@ -65,17 +67,34 @@ const TvSeriesDetails = ({ user }) => {
 
   useEffect(() => {
     const fetchAPI = async () => {
+      setLoading(true);
       setDetail(await fetchSeriesDetail(params.id));
       setVideo(await fetchSeriesVideos(params.id));
       setImages(await fetchSeriesImages(params.id));
       setPoster(await fetchSeriesPoster(params.id));
       setCasts(await fetchSeriesCasts(params.id));
       setSimilarSeries(await fetchSimilarSeries(params.id));
+      setLoading(false);
       window.scroll(0, 0);
     };
 
     fetchAPI();
   }, [params.id]);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          height: "70vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   genres = detail?.genres;
 

@@ -38,6 +38,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { CircularProgress } from "@mui/material";
 
 // https://api.themoviedb.org/3/movie/634649/watch/providers?api_key=52e28db24f9bc94a1c0fce73f9812764
 
@@ -55,6 +56,7 @@ const MovieDetails = ({ user }) => {
   const [poster, setPoster] = useState([]);
   const [casts, setCasts] = useState([]);
   const [similarMovie, setSimilarMovie] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let storedMovie = watchlist.find((o) => o?.id === detail?.id);
 
@@ -74,6 +76,7 @@ const MovieDetails = ({ user }) => {
 
   useEffect(() => {
     const fetchAPI = async () => {
+      setLoading(true);
       setDetail(await fetchMovieDetail(params.id));
       setCrew(await fetchCrew(params.id));
       setVideo(await fetchMovieVideos(params.id));
@@ -81,11 +84,27 @@ const MovieDetails = ({ user }) => {
       setPoster(await fetchMoviePoster(params.id));
       setCasts(await fetchCasts(params.id));
       setSimilarMovie(await fetchSimilarMovie(params.id));
+      setLoading(false);
       window.scroll(0, 0);
     };
 
     fetchAPI();
   }, [params.id]);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          height: "70vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   genres = detail?.genres;
 

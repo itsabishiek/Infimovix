@@ -13,14 +13,18 @@ const Series = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
+  const [loading, setLoading] = useState(false);
 
   const fetchSeries = async () => {
+    setLoading(true);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
+    // console.log(data);
+
     setContent(data.results);
     setNumOfPages(data.total_pages);
-    // console.log(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -52,6 +56,7 @@ const Series = () => {
               date={c.first_air_date || c.release_date}
               media_type="tv"
               vote_average={c.vote_average}
+              loading={loading}
             />
           ))}
       </div>

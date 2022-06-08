@@ -66,7 +66,13 @@ const Footer = () => {
         <h4 className="text-grey">
           Copyright &copy;
           {new Date().getFullYear()} | All rights reserved | Made by Infinity{" "}
-          <a href="/">Founder - Abishiek</a>
+          <a
+            href="https://itsabishiek.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Founder - Abishiek
+          </a>
         </h4>
       </div>
       <div onClick={() => window.scroll(0, 0)} className="move-up">
