@@ -6,8 +6,8 @@ import { AppBar, Tab, Tabs } from "@mui/material";
 import { useHistory } from "react-router";
 import WatchlistTvCard from "../../components/watchlistCard/WatchlistTvCard";
 
-const Watchlist = () => {
-  const { watchlist } = useContext(GlobalContext);
+const Watchlist = ({ watchlist }) => {
+  // const { watchlist } = useContext(GlobalContext);
   const [value, setValue] = React.useState(0);
 
   const history = useHistory();

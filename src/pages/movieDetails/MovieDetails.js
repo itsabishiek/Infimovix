@@ -39,12 +39,14 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { CircularProgress } from "@mui/material";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 // https://api.themoviedb.org/3/movie/634649/watch/providers?api_key=52e28db24f9bc94a1c0fce73f9812764
 
-const MovieDetails = ({ user }) => {
-  const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
-    useContext(GlobalContext);
+const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
+  // const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
+  //   useContext(GlobalContext);
   const params = useParams();
 
   // let params = match.params;
@@ -57,10 +59,6 @@ const MovieDetails = ({ user }) => {
   const [casts, setCasts] = useState([]);
   const [similarMovie, setSimilarMovie] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  let storedMovie = watchlist.find((o) => o?.id === detail?.id);
-
-  const watchlistDisabled = storedMovie ? true : false;
 
   const notifyWatchlist = (msg) => {
     toast.dark(msg, {
@@ -106,6 +104,109 @@ const MovieDetails = ({ user }) => {
     );
   }
 
+  // const inWatchlist = watchlist?.includes(detail?.id);
+
+  const addMovieToWatchlist = async () => {
+    const userRef = doc(db, "watchlist", user?.uid);
+
+    try {
+      await setDoc(userRef, {
+        multimedia: watchlist ? [...watchlist, detail] : [detail],
+      });
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} added to the Watchlist!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+      // console.log(error);
+    }
+  };
+
+  const removeMovieFromWatchlist = async () => {
+    const userRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(
+        userRef,
+        {
+          multimedia: watchlist.filter((item) => item !== detail?.id),
+        },
+        { merge: true }
+      );
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} removed from the Watchlist!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
+  const addMovieToFavourite = async () => {
+    const userRef = doc(db, "favourites", user?.uid);
+
+    try {
+      await setDoc(userRef, {
+        multimedia: favourites ? [...favourites, detail] : [detail],
+      });
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} added to the Favourites!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
+  const removeMovieFromFavourites = async () => {
+    const userRef = doc(db, "favourites", user?.uid);
+
+    try {
+      await setDoc(
+        userRef,
+        {
+          multimedia: favourites.filter((item) => item !== detail?.id),
+        },
+        {
+          merge: true,
+        }
+      );
+
+      setAlert({
+        open: true,
+        message: `${
+          detail?.title || detail?.name
+        } removed from the Favourites!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
   genres = detail?.genres;
 
   let genresList;
@@ -121,7 +222,7 @@ const MovieDetails = ({ user }) => {
     });
   }
 
-  const movieImages = images.map((img, index) => {
+  const movieImages = images?.map((img, index) => {
     return (
       <div key={index} className="img_posters">
         <img
@@ -252,16 +353,11 @@ const MovieDetails = ({ user }) => {
                 {user ? (
                   <AddToQueue
                     className="watchlist-btn"
-                    disabled={watchlistDisabled}
-                    onClick={() => {
-                      addMovieToWatchlist(detail);
-                      notifyWatchlist("Movie added to your watchlist.");
-                    }}
+                    onClick={addMovieToWatchlist}
                   />
                 ) : (
                   <AddToQueue
                     className="watchlist-btn"
-                    disabled={watchlistDisabled}
                     onClick={() => {
                       notifyWatchlist(
                         "You need to logged in to add to watchlist."
@@ -276,10 +372,7 @@ const MovieDetails = ({ user }) => {
                 {user ? (
                   <FavoriteBorderOutlined
                     className="like-btn"
-                    onClick={() => {
-                      addMovieToFavourite(detail);
-                      notifyFavourite("Movie added to your favourites.");
-                    }}
+                    onClick={addMovieToFavourite}
                   />
                 ) : (
                   <FavoriteBorderOutlined

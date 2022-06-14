@@ -26,8 +26,9 @@ import Watchlist from "./pages/watchlist/Watchlist";
 import Liked from "./pages/liked/Liked";
 import AlertBar from "./components/AlertBar";
 import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import PersonDetails from "./pages/personDetails/PersonDetails";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -36,10 +37,52 @@ const App = () => {
     message: "",
     type: "success",
   });
+  const [watchlist, setWatchlist] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   const errorHandler = (error, errorInfo) => {
     console.log("Logging", error, errorInfo);
   };
+
+  useEffect(() => {
+    if (user) {
+      const userRef = doc(db, "watchlist", user?.uid);
+
+      var unsubscribe = onSnapshot(userRef, (movie) => {
+        if (movie.exists()) {
+          // console.log(movie.data().movies);
+          setWatchlist(movie.data().multimedia);
+        } else {
+          console.log("No Items in the watchlist!");
+        }
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const userRef = doc(db, "favourites", user?.uid);
+
+      var unsubscribe = onSnapshot(userRef, (movie) => {
+        if (movie.exists()) {
+          // console.log(movie.data().movies);
+          setFavourites(movie.data().multimedia);
+        } else {
+          console.log("No Items in the watchlist!");
+        }
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [user]);
+
+  // console.log(movieDetails);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -52,6 +95,7 @@ const App = () => {
   }, []);
 
   // console.log(user);
+  // 3PlTfaa7Z5b6evbfanPlnWPqdsI3
 
   return (
     <GlobalProvider>
@@ -68,11 +112,21 @@ const App = () => {
                   <Home />
                 </Route>
                 <Route path="/movie/:id">
-                  <MovieDetails user={user} />
+                  <MovieDetails
+                    user={user}
+                    watchlist={watchlist}
+                    setAlert={setAlert}
+                    favourites={favourites}
+                  />
                 </Route>
 
                 <Route path="/tv/:id">
-                  <TvSeriesDetails user={user} />
+                  <TvSeriesDetails
+                    user={user}
+                    watchlist={watchlist}
+                    setAlert={setAlert}
+                    favourites={favourites}
+                  />
                 </Route>
 
                 <Route path="/about">
@@ -106,10 +160,10 @@ const App = () => {
                     <People />
                   </Route>
                   <Route path="/watchlist">
-                    <Watchlist />
+                    <Watchlist watchlist={watchlist} />
                   </Route>
                   <Route path="/liked">
-                    <Liked />
+                    <Liked favourites={favourites} />
                   </Route>
                 </Container>
               </ErrorBoundary>

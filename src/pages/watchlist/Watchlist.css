@@ -13,6 +13,7 @@
 
 .watchlist_img {
   height: 300px;
+  width: 202px;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,

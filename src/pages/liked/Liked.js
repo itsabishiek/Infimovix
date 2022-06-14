@@ -5,8 +5,8 @@ import { AppBar, Tab, Tabs } from "@mui/material";
 import { useHistory } from "react-router";
 import FavouriteTvCard from "../../components/favouriteCard/FavouriteTvCard";
 
-const Liked = () => {
-  const { liked } = useContext(GlobalContext);
+const Liked = ({ favourites }) => {
+  // const { liked } = useContext(GlobalContext);
   const [value, setValue] = React.useState(0);
 
   const history = useHistory();
@@ -35,11 +35,11 @@ const Liked = () => {
         </Tabs>
       </AppBar>
 
-      {liked.length > 0 ? (
+      {favourites.length > 0 ? (
         <>
           {value === 0 && (
             <div className="watchlist_wrapper">
-              {liked.map((movie) => (
+              {favourites.map((movie) => (
                 <FavouriteMovieCard
                   key={movie.id}
                   id={movie.id}
@@ -53,7 +53,7 @@ const Liked = () => {
 
           {value === 1 && (
             <div className="watchlist_wrapper">
-              {liked.map((movie) => (
+              {favourites.map((movie) => (
                 <FavouriteTvCard
                   key={movie.id}
                   id={movie.id}

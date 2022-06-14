@@ -37,10 +37,12 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { CircularProgress } from "@mui/material";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
-const TvSeriesDetails = ({ user }) => {
-  const { addMovieToWatchlist, addMovieToFavourite } =
-    useContext(GlobalContext);
+const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
+  // const { addMovieToWatchlist, addMovieToFavourite } =
+  //   useContext(GlobalContext);
   const params = useParams();
 
   // let params = match.params;
@@ -96,11 +98,111 @@ const TvSeriesDetails = ({ user }) => {
     );
   }
 
+  const addSeriesToWatchlist = async () => {
+    const userRef = doc(db, "watchlist", user?.uid);
+
+    try {
+      await setDoc(userRef, {
+        multimedia: watchlist ? [...watchlist, detail] : [detail],
+      });
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} added to the Watchlist!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
+  const removeSeriesFromWatchlist = async () => {
+    const userRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(
+        userRef,
+        {
+          multimedia: watchlist.filter((item) => item !== detail?.id),
+        },
+        { merge: true }
+      );
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} removed from the Watchlist!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
+  const addMovieToFavourites = async () => {
+    const userRef = doc(db, "favourites", user?.uid);
+
+    try {
+      await setDoc(userRef, {
+        multimedia: favourites ? [...favourites, detail] : [detail],
+      });
+
+      setAlert({
+        open: true,
+        message: `${detail?.title || detail?.name} added to the Favourites!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
+  const removeMovieFromFavourites = async () => {
+    const userRef = doc(db, "favourites", user?.uid);
+
+    try {
+      await setDoc(
+        userRef,
+        {
+          multimedia: favourites.filter((item) => item !== detail?.id),
+        },
+        {
+          merge: true,
+        }
+      );
+
+      setAlert({
+        open: true,
+        message: `${
+          detail?.title || detail?.name
+        } removed from the Favourites!`,
+        type: "success",
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      });
+    }
+  };
+
   genres = detail?.genres;
 
   let genresList;
   if (genres) {
-    genresList = genres.map((g, i) => {
+    genresList = genres?.map((g, i) => {
       return (
         <li key={i} className="genre_list">
           <button type="button" className="genre_btn">
@@ -111,7 +213,7 @@ const TvSeriesDetails = ({ user }) => {
     });
   }
 
-  const seriesImages = images.map((img, index) => {
+  const seriesImages = images?.map((img, index) => {
     return (
       <div key={index} className="img_posters">
         <img
@@ -123,7 +225,7 @@ const TvSeriesDetails = ({ user }) => {
     );
   });
 
-  const seriesPoster = poster.map((poster, index) => {
+  const seriesPoster = poster?.map((poster, index) => {
     return (
       <div key={index}>
         <img
@@ -140,7 +242,7 @@ const TvSeriesDetails = ({ user }) => {
     );
   });
 
-  const castList = casts.map((cast, index) => {
+  const castList = casts?.map((cast, index) => {
     return (
       <div key={index} className="cast_posters">
         <Link to={`/person/${cast.id}`}>
@@ -163,7 +265,7 @@ const TvSeriesDetails = ({ user }) => {
     );
   });
 
-  const similarSeriesList = similarSeries.map((item, index) => {
+  const similarSeriesList = similarSeries?.map((item, index) => {
     return (
       <div key={index}>
         <div className="cast_posters">
@@ -235,10 +337,7 @@ const TvSeriesDetails = ({ user }) => {
                 {user ? (
                   <AddToQueue
                     className="watchlist-btn"
-                    onClick={() => {
-                      addMovieToWatchlist(detail);
-                      notifyWatchlist("TV show added to your watchlist.");
-                    }}
+                    onClick={addSeriesToWatchlist}
                   />
                 ) : (
                   <AddToQueue
@@ -257,10 +356,7 @@ const TvSeriesDetails = ({ user }) => {
                 {user ? (
                   <FavoriteBorderOutlined
                     className="like-btn"
-                    onClick={() => {
-                      addMovieToFavourite(detail);
-                      notifyFavourite("TV show added to your favourites.");
-                    }}
+                    onClick={addMovieToFavourites}
                   />
                 ) : (
                   <FavoriteBorderOutlined

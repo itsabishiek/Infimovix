@@ -135,7 +135,8 @@ h3 {
 }
 
 .home_poster {
-  max-height: 250px;
+  height: 250px;
+  width: 168px;
   object-fit: contain;
   margin-right: 15px;
   border-radius: 15px;

@@ -44,10 +44,16 @@ const People = () => {
             }
             alt={p.name}
           />
-          <p style={{ color: "rgb(63, 81, 181)", textAlign: "center" }}>
+          <p
+            style={{
+              color: "rgb(63, 81, 181)",
+              textAlign: "center",
+              marginBottom: 0,
+            }}
+          >
             {p.name}
           </p>
-          <p style={{ color: "#5a606b", textAlign: "center" }}>
+          <p style={{ color: "#5a606b", textAlign: "center", marginTop: 5 }}>
             {p.known_for_department}
           </p>
         </Link>
@@ -59,7 +65,13 @@ const People = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: "center", color: "#dde0fd", marginTop: 25 }}>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "var(--primary-color)",
+          margin: "25px 0",
+        }}
+      >
         TRENDING PERSONS ON THIS WEEK
       </h2>
 
