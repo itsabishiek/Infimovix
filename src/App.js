@@ -95,7 +95,6 @@ const App = () => {
   }, []);
 
   // console.log(user);
-  // 3PlTfaa7Z5b6evbfanPlnWPqdsI3
 
   return (
     <GlobalProvider>
@@ -160,10 +159,18 @@ const App = () => {
                     <People />
                   </Route>
                   <Route path="/watchlist">
-                    <Watchlist watchlist={watchlist} />
+                    <Watchlist
+                      watchlist={watchlist}
+                      user={user}
+                      setAlert={setAlert}
+                    />
                   </Route>
                   <Route path="/liked">
-                    <Liked favourites={favourites} />
+                    <Liked
+                      favourites={favourites}
+                      user={user}
+                      setAlert={setAlert}
+                    />
                   </Route>
                 </Container>
               </ErrorBoundary>

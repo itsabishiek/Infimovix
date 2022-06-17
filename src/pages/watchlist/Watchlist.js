@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
-import "./Watchlist.css";
-import WatchlistMovieCard from "../../components/watchlistCard/WatchlistMovieCard";
 import { AppBar, Tab, Tabs } from "@mui/material";
+import React from "react";
 import { useHistory } from "react-router";
+import WatchlistMovieCard from "../../components/watchlistCard/WatchlistMovieCard";
 import WatchlistTvCard from "../../components/watchlistCard/WatchlistTvCard";
+import "./Watchlist.css";
 
-const Watchlist = ({ watchlist }) => {
-  // const { watchlist } = useContext(GlobalContext);
+const Watchlist = ({ watchlist, user, setAlert }) => {
   const [value, setValue] = React.useState(0);
 
   const history = useHistory();
@@ -47,6 +45,9 @@ const Watchlist = ({ watchlist }) => {
                   title={movie.title || movie.name}
                   poster={movie.poster_path}
                   media_type={movie.seasons}
+                  user={user}
+                  watchlist={watchlist}
+                  setAlert={setAlert}
                 />
               ))}
             </div>
@@ -61,6 +62,9 @@ const Watchlist = ({ watchlist }) => {
                   title={movie.title || movie.name}
                   poster={movie.poster_path}
                   media_type={movie.seasons}
+                  user={user}
+                  watchlist={watchlist}
+                  setAlert={setAlert}
                 />
               ))}
             </div>

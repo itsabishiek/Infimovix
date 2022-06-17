@@ -1,4 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import {
+  AddToQueue,
+  FavoriteBorderOutlined,
+  PlayArrow,
+} from "@mui/icons-material";
+import { CircularProgress, IconButton } from "@mui/material";
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import MediaQuery from "react-responsive";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import styled from "styled-components";
+import AppModal from "../../components/modal/AppModal";
+import ShareMenu from "../../components/ShareMenu";
 import {
   fetchCasts,
   fetchCrew,
@@ -12,44 +25,15 @@ import {
   img_base,
   unavailable,
 } from "../../config/config";
-import styled from "styled-components";
-import "./MovieDetails.css";
-import { calcTime, convertMoney } from "../../helpers/Helpers";
-import { Link, useParams } from "react-router-dom";
-import MediaQuery from "react-responsive";
-import { GlobalContext } from "../../context/GlobalState";
-import { toast } from "react-toastify";
-import {
-  AddToQueue,
-  FavoriteBorderOutlined,
-  PlayCircleFilledRounded,
-  Share,
-} from "@mui/icons-material";
-import AppModal from "../../components/modal/AppModal";
-import {
-  EmailIcon,
-  EmailShareButton,
-  FacebookIcon,
-  FacebookShareButton,
-  TelegramIcon,
-  TelegramShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
-import { CircularProgress } from "@mui/material";
-import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { calcTime, convertMoney } from "../../helpers/Helpers";
+import "./MovieDetails.css";
 
 // https://api.themoviedb.org/3/movie/634649/watch/providers?api_key=52e28db24f9bc94a1c0fce73f9812764
 
 const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
-  // const { addMovieToWatchlist, watchlist, addMovieToFavourite } =
-  //   useContext(GlobalContext);
   const params = useParams();
 
-  // let params = match.params;
   let genres = [];
   const [detail, setDetail] = useState([]);
   const [crew, setCrew] = useState([]);
@@ -59,6 +43,8 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
   const [casts, setCasts] = useState([]);
   const [similarMovie, setSimilarMovie] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingWatchlist, setLoadingWatchlist] = useState(false);
+  const [loadingFavourites, setLoadingFavourites] = useState(false);
 
   const notifyWatchlist = (msg) => {
     toast.dark(msg, {
@@ -110,9 +96,12 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
     const userRef = doc(db, "watchlist", user?.uid);
 
     try {
+      setLoadingWatchlist(true);
       await setDoc(userRef, {
         multimedia: watchlist ? [...watchlist, detail] : [detail],
       });
+
+      setLoadingWatchlist(false);
 
       setAlert({
         open: true,
@@ -129,73 +118,20 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
     }
   };
 
-  const removeMovieFromWatchlist = async () => {
-    const userRef = doc(db, "watchlist", user.uid);
-
-    try {
-      await setDoc(
-        userRef,
-        {
-          multimedia: watchlist.filter((item) => item !== detail?.id),
-        },
-        { merge: true }
-      );
-
-      setAlert({
-        open: true,
-        message: `${detail?.title || detail?.name} removed from the Watchlist!`,
-        type: "success",
-      });
-    } catch (error) {
-      setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-      });
-    }
-  };
-
   const addMovieToFavourite = async () => {
     const userRef = doc(db, "favourites", user?.uid);
 
     try {
+      setLoadingFavourites(true);
       await setDoc(userRef, {
         multimedia: favourites ? [...favourites, detail] : [detail],
       });
 
+      setLoadingFavourites(false);
+
       setAlert({
         open: true,
         message: `${detail?.title || detail?.name} added to the Favourites!`,
-        type: "success",
-      });
-    } catch (error) {
-      setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-      });
-    }
-  };
-
-  const removeMovieFromFavourites = async () => {
-    const userRef = doc(db, "favourites", user?.uid);
-
-    try {
-      await setDoc(
-        userRef,
-        {
-          multimedia: favourites.filter((item) => item !== detail?.id),
-        },
-        {
-          merge: true,
-        }
-      );
-
-      setAlert({
-        open: true,
-        message: `${
-          detail?.title || detail?.name
-        } removed from the Favourites!`,
         type: "success",
       });
     } catch (error) {
@@ -234,7 +170,7 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
     );
   });
 
-  const moviePoster = poster.map((poster, index) => {
+  const moviePoster = poster?.map((poster, index) => {
     return (
       <div key={index}>
         <img
@@ -251,7 +187,7 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
     );
   });
 
-  const castList = casts.map((cast, index) => {
+  const castList = casts?.map((cast, index) => {
     // console.log(cast);
     return (
       <div key={index} className="cast_posters">
@@ -275,7 +211,7 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
     );
   });
 
-  const similarMovieList = similarMovie.map((item, index) => {
+  const similarMovieList = similarMovie?.map((item, index) => {
     return (
       <div key={index}>
         <div className="cast_posters">
@@ -351,38 +287,66 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
               <div className="watchlist">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCHLIST</h3>
                 {user ? (
-                  <AddToQueue
-                    className="watchlist-btn"
-                    onClick={addMovieToWatchlist}
-                  />
-                ) : (
-                  <AddToQueue
-                    className="watchlist-btn"
-                    onClick={() => {
-                      notifyWatchlist(
-                        "You need to logged in to add to watchlist."
-                      );
+                  <IconButton
+                    style={{
+                      backgroundColor: "var(--primary-color)",
+                      margin: "10px 5px",
                     }}
-                  />
+                  >
+                    {!loadingWatchlist ? (
+                      <AddToQueue onClick={addMovieToWatchlist} />
+                    ) : (
+                      <CircularProgress size={20} color="inherit" />
+                    )}
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    style={{
+                      backgroundColor: "var(--primary-color)",
+                      margin: "10px 5px",
+                    }}
+                  >
+                    <AddToQueue
+                      onClick={() => {
+                        notifyWatchlist(
+                          "You need to logged in to add to watchlist."
+                        );
+                      }}
+                    />
+                  </IconButton>
                 )}
               </div>
 
               <div className="like">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>FAVOURITE</h3>
                 {user ? (
-                  <FavoriteBorderOutlined
-                    className="like-btn"
-                    onClick={addMovieToFavourite}
-                  />
-                ) : (
-                  <FavoriteBorderOutlined
-                    className="like-btn"
-                    onClick={() => {
-                      notifyFavourite(
-                        "You need to logged in to add to favorites."
-                      );
+                  <IconButton
+                    style={{
+                      backgroundColor: "var(--primary-color)",
+                      margin: "10px 5px",
                     }}
-                  />
+                  >
+                    {!loadingFavourites ? (
+                      <FavoriteBorderOutlined onClick={addMovieToFavourite} />
+                    ) : (
+                      <CircularProgress size={20} color="inherit" />
+                    )}
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    style={{
+                      backgroundColor: "var(--primary-color)",
+                      margin: "10px 5px",
+                    }}
+                  >
+                    <FavoriteBorderOutlined
+                      onClick={() => {
+                        notifyFavourite(
+                          "You need to logged in to add to favorites."
+                        );
+                      }}
+                    />
+                  </IconButton>
                 )}
               </div>
             </div>
@@ -391,45 +355,21 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
               <div className="trailer">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>WATCH TRAILER</h3>
                 <AppModal video={video}>
-                  <PlayCircleFilledRounded className="play-btn" />
+                  <IconButton
+                    style={{
+                      backgroundColor: "var(--primary-color)",
+                      margin: "10px 5px",
+                    }}
+                  >
+                    <PlayArrow />
+                  </IconButton>
                 </AppModal>
               </div>
 
-              <ShareWrapper className="share">
+              <div className="share">
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>SHARE</h3>
-                <Share className="share-btn" />
-
-                <DropDown>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 15,
-                    }}
-                  >
-                    <FacebookShareButton url={window.location.href}>
-                      <FacebookIcon size={32} round />
-                    </FacebookShareButton>
-
-                    <WhatsappShareButton url={window.location.href}>
-                      <WhatsappIcon size={32} round />
-                    </WhatsappShareButton>
-
-                    <EmailShareButton url={window.location.href}>
-                      <EmailIcon size={32} round />
-                    </EmailShareButton>
-
-                    <TwitterShareButton url={window.location.href}>
-                      <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-
-                    <TelegramShareButton url={window.location.href}>
-                      <TelegramIcon size={32} round />
-                    </TelegramShareButton>
-                  </div>
-                </DropDown>
-              </ShareWrapper>
+                <ShareMenu />
+              </div>
             </div>
           </Text>
         </Content>
@@ -721,35 +661,6 @@ const ContentBar = styled.div`
 
     .column {
       margin: 20px 0;
-    }
-  }
-`;
-
-const DropDown = styled.div`
-  position: absolute;
-  top: 38px;
-  left: 0px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  padding: 10px;
-  opacity: 0;
-
-  @media screen and (max-width: 500px) {
-    transform: translateX(-88px);
-  }
-  @media screen and (max-width: 400px) {
-    transform: translateX(-138px);
-  }
-`;
-
-const ShareWrapper = styled.div`
-  position: relative;
-
-  &:hover {
-    ${DropDown} {
-      opacity: 1;
-      transition-duration: 1s;
     }
   }
 `;

@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
-import FavouriteMovieCard from "../../components/favouriteCard/FavouriteMovieCard";
 import { AppBar, Tab, Tabs } from "@mui/material";
+import React from "react";
 import { useHistory } from "react-router";
+import FavouriteMovieCard from "../../components/favouriteCard/FavouriteMovieCard";
 import FavouriteTvCard from "../../components/favouriteCard/FavouriteTvCard";
 
-const Liked = ({ favourites }) => {
-  // const { liked } = useContext(GlobalContext);
+const Liked = ({ favourites, user, setAlert }) => {
   const [value, setValue] = React.useState(0);
 
   const history = useHistory();
@@ -46,6 +44,9 @@ const Liked = ({ favourites }) => {
                   title={movie.title || movie.name}
                   poster={movie.poster_path}
                   media_type={movie.seasons}
+                  user={user}
+                  favourites={favourites}
+                  setAlert={setAlert}
                 />
               ))}
             </div>
@@ -60,6 +61,9 @@ const Liked = ({ favourites }) => {
                   title={movie.title || movie.name}
                   poster={movie.poster_path}
                   media_type={movie.seasons}
+                  user={user}
+                  favourites={favourites}
+                  setAlert={setAlert}
                 />
               ))}
             </div>

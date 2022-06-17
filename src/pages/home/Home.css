@@ -137,7 +137,7 @@ h3 {
 .home_poster {
   height: 250px;
   width: 168px;
-  object-fit: contain;
+  object-fit: cover;
   margin-right: 15px;
   border-radius: 15px;
   box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
