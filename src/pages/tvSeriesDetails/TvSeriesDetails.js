@@ -109,32 +109,6 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
     }
   };
 
-  const removeSeriesFromWatchlist = async () => {
-    const userRef = doc(db, "watchlist", user.uid);
-
-    try {
-      await setDoc(
-        userRef,
-        {
-          multimedia: watchlist.filter((item) => item !== detail?.id),
-        },
-        { merge: true }
-      );
-
-      setAlert({
-        open: true,
-        message: `${detail?.title || detail?.name} removed from the Watchlist!`,
-        type: "success",
-      });
-    } catch (error) {
-      setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-      });
-    }
-  };
-
   const addMovieToFavourites = async () => {
     const userRef = doc(db, "favourites", user?.uid);
 
@@ -149,36 +123,6 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
       setAlert({
         open: true,
         message: `${detail?.title || detail?.name} added to the Favourites!`,
-        type: "success",
-      });
-    } catch (error) {
-      setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-      });
-    }
-  };
-
-  const removeMovieFromFavourites = async () => {
-    const userRef = doc(db, "favourites", user?.uid);
-
-    try {
-      await setDoc(
-        userRef,
-        {
-          multimedia: favourites.filter((item) => item !== detail?.id),
-        },
-        {
-          merge: true,
-        }
-      );
-
-      setAlert({
-        open: true,
-        message: `${
-          detail?.title || detail?.name
-        } removed from the Favourites!`,
         type: "success",
       });
     } catch (error) {
