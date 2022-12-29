@@ -23,7 +23,7 @@ const SingleContent = ({
       {!loading && (
         <Badge
           className="badge"
-          badgeContent={vote_average}
+          badgeContent={vote_average === "0.0" ? "-.-" : vote_average}
           color={vote_average > 6 ? "primary" : "secondary"}
           style={{ position: "absolute" }}
         />

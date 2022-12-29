@@ -263,7 +263,9 @@ const MovieDetails = ({ user, watchlist, setAlert, favourites }) => {
             <div className="rating-directors">
               <div>
                 <h3 style={{ color: "rgb(63, 81, 181)" }}>RATING</h3>
-                <div className="score">{detail.vote_average}</div>
+                <div className="score">
+                  {parseFloat(detail.vote_average).toFixed(1)}
+                </div>
               </div>
 
               <div className="director">

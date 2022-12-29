@@ -120,8 +120,8 @@ const Header = ({ alert, setAlert, user }) => {
           <ul>
             {user ? (
               <img
-                src={user.photoURL}
-                alt={user.displayName || user.email.split("@")[0]}
+                src={user.photoURL || user.email.split("@")[0]}
+                alt={user.displayName}
                 style={{
                   height: 35,
                   width: 35,
