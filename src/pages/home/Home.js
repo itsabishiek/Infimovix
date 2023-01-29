@@ -17,6 +17,7 @@ import {
 } from "../../config/config";
 import { Skeleton } from "@mui/material";
 import "./Home.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
@@ -69,10 +70,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={`${img_base}${item.poster}`}
               alt={item.name}
+              effect="blur"
             />
           )}
         </Link>
@@ -92,10 +94,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>
@@ -115,10 +118,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>
@@ -138,10 +142,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>
@@ -161,10 +166,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>
@@ -184,10 +190,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>
@@ -207,10 +214,11 @@ const Home = () => {
               height={250}
             />
           ) : (
-            <img
+            <LazyLoadImage
               className="home_poster"
               src={item.poster ? item.poster : unavailable}
               alt={item.title}
+              effect="blur"
             />
           )}
         </Link>

@@ -1,41 +1,38 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CustomPagination from "../../components/customPagination/CustomPagination";
 import { unavailable } from "../../config/config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import "./People.css";
 
 const People = () => {
   const [persons, setPersons] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
-  const [page, setPage] = useState(1);
 
   const fetchPersons = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/trending/person/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
+        `https://api.themoviedb.org/3/trending/person/week?api_key=${process.env.REACT_APP_API_KEY}`
       );
 
       // console.log(data);
 
       setPersons(data.results);
-      setNumOfPages(data.total_pages);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    window.scroll(0, 0);
     fetchPersons();
     // eslint-disable-next-line
-  }, [page]);
+  }, []);
 
   const trendingPersons = persons.map((p, i) => {
     return (
       <div key={i} className="persons_container">
         <Link to={`/person/${p.id}`}>
-          <img
+          <LazyLoadImage
             className="persons_img"
             src={
               p.profile_path
@@ -43,6 +40,7 @@ const People = () => {
                 : unavailable
             }
             alt={p.name}
+            effect="blur"
           />
           <p
             style={{
@@ -76,9 +74,6 @@ const People = () => {
       </h2>
 
       <div className="trending_persons">{trendingPersons}</div>
-      {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
-      )}
     </div>
   );
 };

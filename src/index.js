@@ -5,6 +5,7 @@ import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -2,6 +2,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { img_300 } from "../../config/config";
 import { db } from "../../firebase";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const WatchlistTvCard = ({
   id,
@@ -43,10 +44,11 @@ const WatchlistTvCard = ({
       {media_type && (
         <div className="watchlist_container">
           <Link to={`/tv/${id}`}>
-            <img
+            <LazyLoadImage
               className="watchlist_img"
               src={`${img_300}${poster}`}
               alt={title}
+              effect="blur"
             />
           </Link>
 

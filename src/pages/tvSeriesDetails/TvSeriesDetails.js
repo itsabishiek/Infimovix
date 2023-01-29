@@ -25,6 +25,8 @@ import {
   unavailable,
 } from "../../config/config";
 import { db } from "../../firebase";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import "./TvSeriesDetails.css";
 
 const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
@@ -152,10 +154,11 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
   const seriesImages = images?.map((img, index) => {
     return (
       <div key={index} className="img_posters">
-        <img
+        <LazyLoadImage
           src={img.file_path && `${img_base}${img.file_path}`}
           alt=""
           className="img_poster"
+          effect="blur"
         />
       </div>
     );
@@ -164,7 +167,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
   const seriesPoster = poster?.map((poster, index) => {
     return (
       <div key={index}>
-        <img
+        <LazyLoadImage
           src={poster.file_path && `${img_base}${poster.file_path}`}
           alt=""
           style={{
@@ -173,6 +176,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
             marginRight: "15px",
             borderRadius: "10px",
           }}
+          effect="blur"
         />
       </div>
     );
@@ -182,7 +186,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
     return (
       <div key={index} className="cast_posters">
         <Link to={`/person/${cast.id}`}>
-          <img
+          <LazyLoadImage
             className="cast_poster"
             style={{
               height: "260px",
@@ -192,6 +196,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
               cast.profile_path ? `${img_500}${cast.profile_path}` : unavailable
             }
             alt={cast.name}
+            effect="blur"
           />
         </Link>
 
@@ -206,7 +211,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
       <div key={index}>
         <div className="cast_posters">
           <Link to={`/tv/${item.id}`}>
-            <img
+            <LazyLoadImage
               className="cast_poster"
               src={item.poster}
               style={{
@@ -214,6 +219,7 @@ const TvSeriesDetails = ({ user, watchlist, setAlert, favourites }) => {
                 objectFit: "contain",
               }}
               alt={item.title || item.name}
+              effect="blur"
             />
             <p style={{ color: "rgb(63, 81, 181)", textAlign: "center" }}>
               {item.title}

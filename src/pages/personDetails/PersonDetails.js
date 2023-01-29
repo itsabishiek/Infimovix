@@ -10,9 +10,10 @@ import {
   unavailable,
 } from "../../config/config";
 import { AppBar, Tab, Tabs } from "@mui/material";
+import ControlledAccordions from "../../components/accordion/ControlledAccordions";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import "./PersonDetails.css";
-import ControlledAccordions from "../../components/accordion/ControlledAccordions";
 
 const PersonDetails = () => {
   const history = useHistory();
@@ -47,10 +48,11 @@ const PersonDetails = () => {
   return (
     <div className="person-details-container">
       <div className="person-details-sidebar">
-        <img
+        <LazyLoadImage
           className="person-details-img"
           src={`${img_500}${personDetails.profile_path}`}
           alt=""
+          effect="blur"
         />
 
         <div className="personal-info">

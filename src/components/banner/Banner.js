@@ -3,6 +3,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { requests } from "../../config/config";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import "./Banner.css";
 
 const Banner = () => {
@@ -38,9 +40,10 @@ const Banner = () => {
     >
       <div className="banner_img">
         <Link to={`/${banner?.media_type}/${banner?.id}`}>
-          <img
+          <LazyLoadImage
             src={`https://image.tmdb.org/t/p/w500/${banner?.poster_path}`}
             alt={banner?.title}
+            effect="blur"
           />
         </Link>
       </div>

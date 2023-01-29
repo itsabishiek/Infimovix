@@ -4,6 +4,7 @@ import { img_300, unavailable } from "../../config/config";
 import Linking from "../../helpers/Linking";
 import Badge from "@mui/material/Badge";
 import { Skeleton } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const SingleContent = ({
   id,
@@ -36,7 +37,7 @@ const SingleContent = ({
           height={280}
         />
       ) : (
-        <img
+        <LazyLoadImage
           className="poster"
           src={poster ? `${img_300}${poster}` : unavailable}
           alt={title}

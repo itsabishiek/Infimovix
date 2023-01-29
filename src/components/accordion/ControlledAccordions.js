@@ -1,13 +1,14 @@
-import * as React from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import * as React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import "./ControlledAccordions.css";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
 
 export default function ControlledAccordions({
   title,
@@ -56,7 +57,12 @@ export default function ControlledAccordions({
         <AccordionDetails>
           <div className="accordion-details">
             <div>
-              <img className="accordion-img" src={poster} alt="" />
+              <LazyLoadImage
+                className="accordion-img"
+                src={poster}
+                alt=""
+                effect="blur"
+              />
             </div>
 
             <div className="accordion-contents">
