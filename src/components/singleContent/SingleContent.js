@@ -21,7 +21,7 @@ const SingleContent = ({
 
   return (
     <Linking id={id} media_type={media_type}>
-      {!loading && (
+      {!loading && media_type !== "person" && (
         <Badge
           className="badge"
           badgeContent={vote_average === "0.0" ? "-.-" : vote_average}
@@ -54,32 +54,34 @@ const SingleContent = ({
       ) : (
         <b className="title">{truncate(title, 14)}</b>
       )}
-      <span className="subTitle">
-        {loading ? (
-          <Skeleton
-            variant="text"
-            style={{
-              borderRadius: 2,
-              margin: "0px 5px",
-            }}
-            width={40}
-          />
-        ) : (
-          <span>{media_type === "tv" ? "TV Series" : "Movie"}</span>
-        )}
-        {loading ? (
-          <Skeleton
-            variant="text"
-            style={{
-              borderRadius: 2,
-              margin: "0px 5px",
-            }}
-            width={60}
-          />
-        ) : (
-          <span className="subTitle">{date}</span>
-        )}
-      </span>
+      {media_type !== "person" && (
+        <span className="subTitle">
+          {loading ? (
+            <Skeleton
+              variant="text"
+              style={{
+                borderRadius: 2,
+                margin: "0px 5px",
+              }}
+              width={40}
+            />
+          ) : (
+            <span>{media_type === "tv" ? "TV Series" : "Movie"}</span>
+          )}
+          {loading ? (
+            <Skeleton
+              variant="text"
+              style={{
+                borderRadius: 2,
+                margin: "0px 5px",
+              }}
+              width={60}
+            />
+          ) : (
+            <span className="subTitle">{date}</span>
+          )}
+        </span>
+      )}
     </Linking>
   );
 };

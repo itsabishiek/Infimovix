@@ -123,49 +123,9 @@ const PersonDetails = () => {
 
         {value === 0 && (
           <div>
-            {personMovieCredits?.cast?.map((item) => (
-              <ControlledAccordions
-                key={item.id}
-                title={item?.title}
-                release_date={item.release_date ? item?.release_date : "----"}
-                poster={
-                  item.poster_path
-                    ? `${img_200}${item?.poster_path}`
-                    : unavailable
-                }
-                overview={item?.overview}
-                link={`/movie/${item.id}`}
-              />
-            ))}
-          </div>
-        )}
-
-        {value === 1 && (
-          <div>
-            {personTVCredits?.cast?.map((item) => (
-              <ControlledAccordions
-                key={item.id}
-                title={item?.name}
-                release_date={
-                  item.first_air_date ? item?.first_air_date : "----"
-                }
-                poster={
-                  item.poster_path
-                    ? `${img_200}${item?.poster_path}`
-                    : unavailable
-                }
-                overview={item?.overview}
-                link={`/movie/${item.id}`}
-              />
-            ))}
-          </div>
-        )}
-
-        {value === 2 && (
-          <div>
-            <h2 style={{ marginBottom: 20, marginLeft: 5 }}>Movies</h2>
-            <div>
-              {personMovieCredits?.crew?.map((item) => (
+            {personMovieCredits?.cast
+              ?.sort((a, b) => (a.release_date > b.release_date ? -1 : 1))
+              .map((item) => (
                 <ControlledAccordions
                   key={item.id}
                   title={item?.title}
@@ -175,17 +135,18 @@ const PersonDetails = () => {
                       ? `${img_200}${item?.poster_path}`
                       : unavailable
                   }
-                  job={item?.job}
                   overview={item?.overview}
                   link={`/movie/${item.id}`}
                 />
               ))}
-            </div>
+          </div>
+        )}
 
-            <h2 style={{ marginBottom: 20, marginLeft: 5 }}>Tv Series</h2>
-
-            <div>
-              {personTVCredits?.crew?.map((item) => (
+        {value === 1 && (
+          <div>
+            {personTVCredits?.cast
+              ?.sort((a, b) => (a.first_air_date > b.first_air_date ? -1 : 1))
+              .map((item) => (
                 <ControlledAccordions
                   key={item.id}
                   title={item?.name}
@@ -197,11 +158,60 @@ const PersonDetails = () => {
                       ? `${img_200}${item?.poster_path}`
                       : unavailable
                   }
-                  job={item?.job}
                   overview={item?.overview}
                   link={`/movie/${item.id}`}
                 />
               ))}
+          </div>
+        )}
+
+        {value === 2 && (
+          <div>
+            <h2 style={{ marginBottom: 20, marginLeft: 5 }}>Movies</h2>
+            <div>
+              {personMovieCredits?.crew
+                ?.sort((a, b) => (a.release_date > b.release_date ? -1 : 1))
+                .map((item) => (
+                  <ControlledAccordions
+                    key={item.id}
+                    title={item?.title}
+                    release_date={
+                      item.release_date ? item?.release_date : "----"
+                    }
+                    poster={
+                      item.poster_path
+                        ? `${img_200}${item?.poster_path}`
+                        : unavailable
+                    }
+                    job={item?.job}
+                    overview={item?.overview}
+                    link={`/movie/${item.id}`}
+                  />
+                ))}
+            </div>
+
+            <h2 style={{ marginBottom: 20, marginLeft: 5 }}>Tv Series</h2>
+
+            <div>
+              {personTVCredits?.crew
+                ?.sort((a, b) => (a.first_air_date > b.first_air_date ? -1 : 1))
+                .map((item) => (
+                  <ControlledAccordions
+                    key={item.id}
+                    title={item?.name}
+                    release_date={
+                      item.first_air_date ? item?.first_air_date : "----"
+                    }
+                    poster={
+                      item.poster_path
+                        ? `${img_200}${item?.poster_path}`
+                        : unavailable
+                    }
+                    job={item?.job}
+                    overview={item?.overview}
+                    link={`/movie/${item.id}`}
+                  />
+                ))}
             </div>
           </div>
         )}

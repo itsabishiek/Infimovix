@@ -10,19 +10,28 @@ const Search = () => {
   const [type, setType] = useState(0);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
-  const [content, setContent] = useState();
+  const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [notFound, setNotFound] = useState(false);
 
   const fetchSearch = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+        `https://api.themoviedb.org/3/search/${
+          (type === 0 && "movie") ||
+          (type === 1 && "tv") ||
+          (type === 2 && "person")
+        }?api_key=${
           process.env.REACT_APP_API_KEY
         }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
 
       setContent(data.results);
       setNumOfPages(data.total_pages);
+
+      if (data.results.length === 0) {
+        setNotFound(true);
+      }
       // console.log(data);
     } catch (error) {
       console.error(error);
@@ -50,7 +59,7 @@ const Search = () => {
           onClick={fetchSearch}
           variant="contained"
           style={{ marginLeft: 20 }}
-          size="large"
+          size="small"
           type="submit"
         >
           <SearchIcon fontSize="large" type="submit" />
@@ -67,9 +76,11 @@ const Search = () => {
         }}
         style={{ paddingBottom: 5 }}
         aria-label="disabled tabs example"
+        fullWidth
       >
-        <Tab style={{ width: "50%" }} label="Search Movies" />
-        <Tab style={{ width: "50%" }} label="Search TV Series" />
+        <Tab style={{ width: "33.3%" }} label="Search Movies" />
+        <Tab style={{ width: "33.3%" }} label="Search TV Series" />
+        <Tab style={{ width: "33.3%" }} label="Search Cast/Crew" />
       </Tabs>
 
       <div className="trending">
@@ -78,51 +89,58 @@ const Search = () => {
             <SingleContent
               key={c.id}
               id={c.id}
-              poster={c.poster_path}
+              poster={c.poster_path || c.profile_path}
               title={c.title || c.name}
               date={c.first_air_date || c.release_date}
-              media_type={type ? "tv" : "movie"}
-              vote_average={c.vote_average}
+              media_type={
+                (type === 0 && "movie") ||
+                (type === 1 && "tv") ||
+                (type === 2 && "person")
+              }
+              vote_average={c.vote_average || (type === 2 && "")}
             />
           ))}
 
-        {searchText === "" &&
-          !content &&
-          (type ? (
-            <div>
-              <img
-                style={{ marginTop: 35, width: "300px", height: "300px" }}
-                src="/assets/images/search.svg"
-                alt=""
-              />{" "}
-              <h2
-                style={{
-                  textAlign: "center",
-                  color: "rgb(63, 81, 181)",
-                  margin: 0,
-                }}
-              >
-                Search TV Series
-              </h2>
-            </div>
-          ) : (
-            <div>
-              <img
-                style={{ marginTop: 35, width: "300px", height: "300px" }}
-                src="/assets/images/search.svg"
-                alt=""
-              />
-              <h2
-                style={{
-                  textAlign: "center",
-                  color: "rgb(63, 81, 181)",
-                  margin: 0,
-                }}
-              >
-                Search Movies
-              </h2>
-            </div>
-          ))}
+        {searchText === "" && (
+          <div>
+            <img
+              style={{ marginTop: 35, width: "300px", height: "300px" }}
+              src="/assets/images/search.svg"
+              alt=""
+            />{" "}
+            <h2
+              style={{
+                textAlign: "center",
+                color: "rgb(63, 81, 181)",
+                margin: 0,
+              }}
+            >
+              Search{" "}
+              {(type === 0 && "Movies") ||
+                (type === 1 && "TV Series") ||
+                (type === 2 && "Cast/Crew")}
+            </h2>
+          </div>
+        )}
+
+        {searchText && notFound && (
+          <div>
+            <img
+              style={{ marginTop: 35, width: "300px", height: "300px" }}
+              src="/assets/images/not_found.svg"
+              alt=""
+            />{" "}
+            <h2
+              style={{
+                textAlign: "center",
+                color: "rgb(63, 81, 181)",
+                margin: 0,
+              }}
+            >
+              No results found
+            </h2>
+          </div>
+        )}
       </div>
 
       {numOfPages > 1 && (

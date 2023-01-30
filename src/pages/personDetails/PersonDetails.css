@@ -20,6 +20,7 @@
 .person-details-info h2 {
   font-size: 23px;
   color: var(--primary-color);
+  margin: 0;
 }
 
 .person-details-info p {
