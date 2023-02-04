@@ -78,9 +78,9 @@ const Search = () => {
         aria-label="disabled tabs example"
         fullWidth
       >
-        <Tab style={{ width: "33.3%" }} label="Search Movies" />
-        <Tab style={{ width: "33.3%" }} label="Search TV Series" />
-        <Tab style={{ width: "33.3%" }} label="Search Cast/Crew" />
+        <Tab style={{ width: "33.3%" }} label="Movies" />
+        <Tab style={{ width: "33.3%" }} label="TV Series" />
+        <Tab style={{ width: "33.3%" }} label="Cast/Crew" />
       </Tabs>
 
       <div className="trending">
