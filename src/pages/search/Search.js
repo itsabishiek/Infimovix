@@ -29,9 +29,6 @@ const Search = () => {
       setContent(data.results);
       setNumOfPages(data.total_pages);
 
-      if (data.results.length === 0) {
-        setNotFound(true);
-      }
       // console.log(data);
     } catch (error) {
       console.error(error);
@@ -41,6 +38,7 @@ const Search = () => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchSearch();
+
     // eslint-disable-next-line
   }, [page, type]);
 
@@ -56,7 +54,12 @@ const Search = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <Button
-          onClick={fetchSearch}
+          onClick={() => {
+            fetchSearch();
+            if (content === []) {
+              setNotFound(true);
+            }
+          }}
           variant="contained"
           style={{ marginLeft: 20 }}
           size="small"
