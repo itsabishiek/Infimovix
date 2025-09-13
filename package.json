@@ -53,5 +53,8 @@
   },
   "devDependencies": {
     "react-devtools": "^4.18.0"
+  },
+  "resolutions": {
+    "shell-quote": "1.7.3"
   }
 }
